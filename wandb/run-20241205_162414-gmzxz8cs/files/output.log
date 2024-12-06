@@ -1,0 +1,59 @@
+
+ 55%|████████████████████████████████████████████████▊                                        | 22001/40080 [00:00<00:00, 26273.98it/s]Traceback (most recent call last):
+  File "my_experiments/tasks/task1/rank_dropout.py", line 1061, in <module>
+    main()
+  File "my_experiments/tasks/task1/rank_dropout.py", line 950, in main
+    train_result = trainer.train(resume_from_checkpoint=checkpoint)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 1859, in train
+    return inner_training_loop(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 2203, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3138, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3161, in compute_loss
+    outputs = model(**inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/peft_model.py", line 937, in forward
+    return self.base_model(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/tuners/tuners_utils.py", line 161, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 1191, in forward
+    outputs = self.roberta(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 828, in forward
+    encoder_outputs = self.encoder(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 517, in forward
+    layer_outputs = layer_module(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 448, in forward
+    layer_output = apply_chunking_to_forward(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/pytorch_utils.py", line 206, in apply_chunking_to_forward
+    num_args_in_forward_chunk_fn = len(inspect.signature(forward_fn).parameters)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/inspect.py", line 3105, in signature
+    return Signature.from_callable(obj, follow_wrapped=follow_wrapped)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/inspect.py", line 2854, in from_callable
+    return _signature_from_callable(obj, sigcls=cls,
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/inspect.py", line 2233, in _signature_from_callable
+    sig = _signature_from_callable(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/inspect.py", line 2246, in _signature_from_callable
+    obj = unwrap(obj, stop=(lambda f: hasattr(f, "__signature__")))
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/inspect.py", line 518, in unwrap
+    memo = {id(f): f}
+KeyboardInterrupt

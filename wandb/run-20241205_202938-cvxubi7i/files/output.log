@@ -1,0 +1,213 @@
+
+
+
+
+
+
+
+  0%|                                                                                             | 19/40080 [00:13<7:44:25,  1.44it/s]
+
+
+
+
+
+
+
+  0%|                                                                                             | 39/40080 [00:27<7:54:13,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▏                                                                                            | 59/40080 [00:41<7:55:02,  1.40it/s]
+
+
+
+
+
+
+
+  0%|▏                                                                                            | 79/40080 [00:55<7:53:33,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▏                                                                                            | 98/40080 [01:09<7:54:14,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▎                                                                                           | 118/40080 [01:23<7:55:19,  1.40it/s]
+
+
+
+
+
+
+
+  0%|▎                                                                                           | 138/40080 [01:37<7:52:30,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▎                                                                                           | 157/40080 [01:51<7:55:57,  1.40it/s]
+
+
+
+
+
+
+
+
+  0%|▍                                                                                           | 180/40080 [02:07<7:52:42,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▍                                                                                           | 199/40080 [02:21<7:54:55,  1.40it/s]
+
+
+
+
+
+
+
+  1%|▌                                                                                           | 219/40080 [02:35<7:53:11,  1.40it/s]
+
+
+
+
+
+
+
+  1%|▌                                                                                           | 239/40080 [02:49<7:53:58,  1.40it/s]
+
+
+
+
+
+
+
+  1%|▌                                                                                           | 258/40080 [03:03<7:56:42,  1.39it/s]
+
+
+
+
+
+
+
+  1%|▋                                                                                           | 278/40080 [03:17<7:52:11,  1.40it/s]
+
+
+
+
+
+
+
+  1%|▋                                                                                           | 298/40080 [03:32<7:57:44,  1.39it/s]
+
+
+
+
+
+
+
+
+  1%|▋                                                                                           | 320/40080 [03:47<8:05:11,  1.37it/s]
+
+
+
+
+  1%|▊                                                                                           | 334/40080 [03:57<6:45:08,  1.64it/s][INFO|trainer.py:3614] 2024-12-05 20:33:39,053 >> ***** Running Evaluation *****
+[INFO|trainer.py:3616] 2024-12-05 20:33:39,053 >>   Num examples = 408
+[INFO|trainer.py:3619] 2024-12-05 20:33:39,053 >>   Batch size = 8
+
+
+
+
+
+
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 51/51 [00:12<00:00,  4.13it/s]
+  File "my_experiments/tasks/task1/rank_dropout.py", line 1115, in <module>████████████████████████████| 51/51 [00:12<00:00,  4.13it/s]
+    main()
+  File "my_experiments/tasks/task1/rank_dropout.py", line 1004, in main
+    train_result = trainer.train(resume_from_checkpoint=checkpoint)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 1859, in train
+    return inner_training_loop(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 2298, in _inner_training_loop
+    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 2662, in _maybe_log_save_evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3467, in evaluate
+    output = eval_loop(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3719, in evaluation_loop
+    metrics = self.compute_metrics(EvalPrediction(predictions=all_preds, label_ids=all_labels))
+  File "my_experiments/tasks/task1/rank_dropout.py", line 880, in compute_metrics
+    accuracy_k_results[f"accuracy_{k}"] = compute_accuracy_for_k(k, model_args.lora_rank)
+  File "my_experiments/tasks/task1/rank_dropout.py", line 917, in compute_accuracy_for_k
+    outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "my_experiments/tasks/task1/rank_dropout.py", line 643, in __call__
+    output=self.original_forward(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/peft_model.py", line 937, in forward
+    return self.base_model(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/tuners/tuners_utils.py", line 161, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 1191, in forward
+    outputs = self.roberta(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 828, in forward
+    encoder_outputs = self.encoder(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 517, in forward
+    layer_outputs = layer_module(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 448, in forward
+    layer_output = apply_chunking_to_forward(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/pytorch_utils.py", line 237, in apply_chunking_to_forward
+    return forward_fn(*input_tensors)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 460, in feed_forward_chunk
+    intermediate_output = self.intermediate(attention_output)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 359, in forward
+    hidden_states = self.intermediate_act_fn(hidden_states)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/activations.py", line 78, in forward
+    return self.act(input)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacity of 3.71 GiB of which 6.50 MiB is free. Including non-PyTorch memory, this process has 3.68 GiB memory in use. Of the allocated memory 3.46 GiB is allocated by PyTorch, and 127.82 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,794 @@
+2024-12-02 14:51:34,261 INFO    StreamThr :9271 [internal.py:wandb_internal():86] W&B internal server running at pid: 9271, started at: 2024-12-02 14:51:34.261467
+2024-12-02 14:51:34,262 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status
+2024-12-02 14:51:34,264 INFO    WriterThread:9271 [datastore.py:open_for_write():87] open: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/run-k2er7qiv.wandb
+2024-12-02 14:51:34,264 DEBUG   SenderThread:9271 [sender.py:send():379] send: header
+2024-12-02 14:51:34,308 DEBUG   SenderThread:9271 [sender.py:send():379] send: run
+2024-12-02 14:51:34,785 INFO    SenderThread:9271 [dir_watcher.py:__init__():211] watching files in: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files
+2024-12-02 14:51:34,785 INFO    SenderThread:9271 [sender.py:_start_run_threads():1124] run started: k2er7qiv with start time 1733147494.261301
+2024-12-02 14:51:34,792 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: check_version
+2024-12-02 14:51:34,792 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: check_version
+2024-12-02 14:51:34,934 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: run_start
+2024-12-02 14:51:34,941 DEBUG   HandlerThread:9271 [system_info.py:__init__():26] System info init
+2024-12-02 14:51:34,942 DEBUG   HandlerThread:9271 [system_info.py:__init__():41] System info init done
+2024-12-02 14:51:34,942 INFO    HandlerThread:9271 [system_monitor.py:start():194] Starting system monitor
+2024-12-02 14:51:34,942 INFO    SystemMonitor:9271 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-12-02 14:51:34,942 INFO    HandlerThread:9271 [system_monitor.py:probe():214] Collecting system info
+2024-12-02 14:51:34,942 INFO    SystemMonitor:9271 [interfaces.py:start():190] Started cpu monitoring
+2024-12-02 14:51:34,942 INFO    SystemMonitor:9271 [interfaces.py:start():190] Started disk monitoring
+2024-12-02 14:51:34,943 INFO    SystemMonitor:9271 [interfaces.py:start():190] Started gpu monitoring
+2024-12-02 14:51:34,943 INFO    SystemMonitor:9271 [interfaces.py:start():190] Started memory monitoring
+2024-12-02 14:51:34,944 INFO    SystemMonitor:9271 [interfaces.py:start():190] Started network monitoring
+2024-12-02 14:51:34,953 DEBUG   HandlerThread:9271 [system_info.py:probe():150] Probing system
+2024-12-02 14:51:34,958 DEBUG   HandlerThread:9271 [system_info.py:_probe_git():135] Probing git
+2024-12-02 14:51:34,969 DEBUG   HandlerThread:9271 [system_info.py:_probe_git():143] Probing git done
+2024-12-02 14:51:34,969 DEBUG   HandlerThread:9271 [system_info.py:probe():198] Probing system done
+2024-12-02 14:51:34,969 DEBUG   HandlerThread:9271 [system_monitor.py:probe():223] {'os': 'Linux-6.8.0-48-generic-x86_64-with-glibc2.10', 'python': '3.8.13', 'heartbeatAt': '2024-12-02T13:51:34.953855', 'startedAt': '2024-12-02T13:51:34.257666', 'docker': None, 'cuda': None, 'args': ('--model_name_or_path', 'roberta-large', '--lora_rank', '25', '--task_name', 'mrpc', '--do_train', '--do_eval', '--seed', '0', '--max_seq_length', '128', '--per_device_train_batch_size', '12', '--learning_rate', '0.001', '--cls_lr', '0.0006', '--num_train_epochs', '70', '--save_steps', '1530', '--evaluation_strategy', 'epoch', '--logging_steps', '20', '--mnli_model_path', 'model_checkpoints/RoBERTa-large/MNLI/rank_25', '--overwrite_output_dir', '--output_dir', 'results_mrpc_25'), 'state': 'running', 'program': 'main_glue_from_pretrained.py', 'codePathLocal': 'main_glue_from_pretrained.py', 'codePath': 'main_glue_from_pretrained.py', 'git': {'remote': 'https://github.com/MohammadrezaBanaei/LoRA-XS.git', 'commit': '9b5f1eff360656e772e5620344fb39cc248d5676'}, 'email': 'alismalahova31@gmail.com', 'root': '/home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS', 'host': 'mallahova', 'username': 'mallahova', 'executable': '/home/mallahova/miniconda3/envs/loraxs/bin/python', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 4015.4171666666666, 'min': 800.0, 'max': 4500.0}, 'cpu_freq_per_core': [{'current': 4002.548, 'min': 800.0, 'max': 4500.0}, {'current': 3880.54, 'min': 800.0, 'max': 4500.0}, {'current': 4100.0, 'min': 800.0, 'max': 4500.0}, {'current': 1662.776, 'min': 800.0, 'max': 4500.0}, {'current': 4100.0, 'min': 800.0, 'max': 4500.0}, {'current': 2626.458, 'min': 800.0, 'max': 4500.0}, {'current': 3302.667, 'min': 800.0, 'max': 4500.0}, {'current': 4100.156, 'min': 800.0, 'max': 4500.0}, {'current': 4100.0, 'min': 800.0, 'max': 4500.0}, {'current': 3324.672, 'min': 800.0, 'max': 4500.0}, {'current': 4100.0, 'min': 800.0, 'max': 4500.0}, {'current': 2661.797, 'min': 800.0, 'max': 4500.0}], 'disk': {'/': {'total': 195.48729705810547, 'used': 144.19026565551758}}, 'gpu': 'NVIDIA GeForce RTX 3050 Laptop GPU', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3050 Laptop GPU', 'memory_total': 4294967296}], 'memory': {'total': 15.346946716308594}}
+2024-12-02 14:51:34,969 INFO    HandlerThread:9271 [system_monitor.py:probe():224] Finished collecting system info
+2024-12-02 14:51:34,969 INFO    HandlerThread:9271 [system_monitor.py:probe():227] Publishing system info
+2024-12-02 14:51:34,969 DEBUG   HandlerThread:9271 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-12-02 14:51:35,786 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_created():271] file/dir created: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/conda-environment.yaml
+2024-12-02 14:51:37,140 DEBUG   HandlerThread:9271 [system_info.py:_save_conda():222] Saving conda packages done
+2024-12-02 14:51:37,140 INFO    HandlerThread:9271 [system_monitor.py:probe():229] Finished publishing system info
+2024-12-02 14:51:37,150 DEBUG   SenderThread:9271 [sender.py:send():379] send: files
+2024-12-02 14:51:37,150 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-12-02 14:51:37,275 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: python_packages
+2024-12-02 14:51:37,276 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: python_packages
+2024-12-02 14:51:37,276 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:51:37,276 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:51:37,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:51:37,585 DEBUG   SenderThread:9271 [sender.py:send():379] send: telemetry
+2024-12-02 14:51:37,586 DEBUG   SenderThread:9271 [sender.py:send():379] send: config
+2024-12-02 14:51:37,586 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:51:37,586 DEBUG   SenderThread:9271 [sender.py:send():379] send: telemetry
+2024-12-02 14:51:37,586 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:51:37,586 WARNING SenderThread:9271 [sender.py:send_metric():1341] Seen metric with glob (shouldn't happen)
+2024-12-02 14:51:37,586 DEBUG   SenderThread:9271 [sender.py:send():379] send: telemetry
+2024-12-02 14:51:37,778 INFO    wandb-upload_0:9271 [upload_job.py:push():131] Uploaded file /tmp/tmpuopo06kiwandb/ktxwkb7j-wandb-metadata.json
+2024-12-02 14:51:37,786 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/conda-environment.yaml
+2024-12-02 14:51:37,786 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_created():271] file/dir created: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/requirements.txt
+2024-12-02 14:51:37,786 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_created():271] file/dir created: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:37,786 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_created():271] file/dir created: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-metadata.json
+2024-12-02 14:51:39,611 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:51:39,786 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:41,787 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:43,787 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:44,772 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:51:45,788 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:47,788 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:49,789 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:49,958 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:51:51,789 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:52,193 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:51:52,194 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:51:52,195 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:51:52,195 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:51:52,195 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:51:52,195 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:51:52,195 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:51:52,195 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:51:52,276 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:51:52,276 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:51:52,276 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:51:52,789 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_created():271] file/dir created: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:51:53,790 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:54,790 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:55,163 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:51:55,790 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:57,791 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:51:59,792 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:00,384 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:01,792 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:03,793 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:05,662 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:05,794 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:06,794 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/config.yaml
+2024-12-02 14:52:07,167 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:52:07,168 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:52:07,168 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:52:07,168 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:52:07,276 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:52:07,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:52:07,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:52:07,795 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:07,795 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:52:08,795 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:09,795 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:10,931 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:11,796 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:13,796 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:15,797 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:16,197 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:17,797 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:19,798 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:21,481 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:21,799 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:22,238 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:52:22,239 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:52:22,240 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:52:22,240 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:52:22,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:52:22,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:52:22,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:52:22,799 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:52:23,799 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:24,800 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:25,800 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:26,779 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:27,800 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:29,801 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:31,802 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:32,066 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:33,802 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:34,944 DEBUG   SystemMonitor:9271 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-12-02 14:52:34,945 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:52:35,803 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:37,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:52:37,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:52:37,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:52:37,398 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:52:37,542 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:52:37,542 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:37,542 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:52:37,543 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:52:37,803 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:37,804 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:52:38,804 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:39,804 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:41,805 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:42,670 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:43,805 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:45,806 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:47,806 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:47,968 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:49,807 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:51,807 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:52,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:52:52,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:52:52,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:52:52,542 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:52:52,543 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:52:52,543 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:52:52,544 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:52:52,808 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:52:53,260 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:53,808 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:54,808 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:55,808 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:57,809 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:52:58,546 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:52:59,810 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:01,810 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:03,811 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:03,863 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:04,946 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:53:05,811 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:07,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:53:07,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:53:07,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:53:07,682 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:53:07,683 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:53:07,683 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:53:07,684 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:53:07,812 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:07,812 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:53:08,812 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:09,161 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:09,812 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:11,813 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:13,813 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:14,461 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:15,814 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:17,815 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:19,754 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:19,815 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:21,815 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:22,276 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:53:22,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:53:22,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:53:22,818 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:53:22,820 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:53:22,820 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:53:22,820 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:53:23,816 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:23,816 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:53:24,816 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:25,059 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:25,817 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:27,818 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:29,818 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:30,364 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:31,819 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:33,819 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:34,947 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:53:35,665 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:35,820 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:37,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:53:37,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:53:37,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:53:37,820 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:37,975 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:53:37,976 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:53:37,976 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:53:37,976 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:53:38,821 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:38,821 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:53:39,821 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:40,960 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:41,821 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:43,822 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:45,823 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:46,288 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:47,823 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:49,824 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:51,589 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:51,824 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:52,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:53:52,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:53:52,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:53:53,111 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:53:53,112 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:53:53,113 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:53:53,113 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:53:53,825 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:53,825 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:53:54,825 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:55,825 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:56,900 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:53:57,826 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:53:59,827 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:01,827 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:02,181 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:03,828 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:04,947 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:54:05,828 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:07,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:54:07,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:54:07,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:54:07,526 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:07,829 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:08,218 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:54:08,219 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:54:08,220 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:54:08,220 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:54:08,829 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:08,830 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:54:09,830 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:11,830 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:12,757 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:13,831 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:15,832 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:17,832 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:18,057 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:19,833 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:21,833 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:22,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:54:22,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:54:22,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:54:23,361 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:23,361 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:54:23,362 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:54:23,362 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:54:23,362 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:54:23,834 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:23,834 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:54:24,834 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:25,834 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:27,835 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:28,661 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:29,836 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:31,836 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:33,837 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:33,957 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:34,948 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:54:35,837 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:37,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:54:37,277 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:54:37,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:54:37,838 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:38,510 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:54:38,511 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:54:38,511 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:54:38,512 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:54:38,838 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:54:39,271 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:39,839 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:40,839 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:41,839 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:43,840 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:44,587 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:45,840 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:47,841 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:49,841 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:49,899 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:51,843 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:52,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:54:52,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:54:52,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:54:53,688 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:54:53,689 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:54:53,690 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:54:53,690 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:54:53,843 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:54:54,844 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:55,209 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:54:56,844 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:54:58,845 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:00,556 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:00,846 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:02,846 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:04,847 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:04,948 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:55:05,871 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:06,847 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:07,277 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:55:07,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:55:07,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:55:08,848 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:08,905 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:55:08,905 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:55:08,906 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:55:08,906 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:55:09,848 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:55:10,849 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:11,184 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:12,849 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:14,850 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:16,483 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:16,850 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:18,851 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:20,851 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:21,777 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:22,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:55:22,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:55:22,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:55:22,852 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:24,046 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:55:24,047 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:55:24,047 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:55:24,048 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:55:24,853 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:24,853 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:55:26,853 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:27,078 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:28,854 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:30,854 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:32,127 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:32,855 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:34,856 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:34,949 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:55:36,856 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:37,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:55:37,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:55:37,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:55:37,474 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:38,857 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:40,370 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:55:40,371 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: metric
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:55:40,372 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:55:40,373 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:55:40,860 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:40,860 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:55:42,652 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:42,861 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:44,861 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:46,862 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:47,955 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:48,862 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/config.yaml
+2024-12-02 14:55:48,862 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:50,863 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:50,984 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:55:50,985 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:55:50,985 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:55:50,986 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:55:51,863 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:55:52,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:55:52,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:55:52,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:55:52,863 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:53,258 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:54,864 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:56,865 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:55:58,578 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:55:58,865 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:00,866 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:02,867 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:03,900 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:04,867 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:04,950 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:56:06,183 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:56:06,184 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:56:06,185 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:56:06,185 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:56:06,868 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:06,868 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:56:07,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:56:07,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:56:07,278 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:56:08,869 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:09,224 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:10,869 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:12,870 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:14,535 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:14,871 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:16,872 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:18,872 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:19,854 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:20,873 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:21,371 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:56:21,372 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:56:21,373 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:56:21,373 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:56:21,873 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:56:22,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:56:22,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:56:22,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:56:22,873 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:24,874 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:25,174 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:26,875 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:28,875 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:30,501 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:30,876 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:32,876 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:34,877 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:34,950 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:56:35,824 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:36,587 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:56:36,588 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:56:36,588 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:56:36,589 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:56:36,878 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:36,878 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:56:37,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:56:37,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:56:37,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:56:38,878 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:40,879 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:41,140 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:42,880 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:44,880 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:46,457 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:46,881 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:48,882 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:50,882 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:51,768 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:51,768 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:56:51,769 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:56:51,769 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:56:51,769 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:56:51,882 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:56:52,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:56:52,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:56:52,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:56:52,883 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:54,883 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:56,884 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:56:57,090 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:56:58,884 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:00,885 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:02,401 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:02,886 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:04,886 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:04,951 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:57:06,887 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:06,963 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:57:06,963 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:57:06,964 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:57:06,964 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:57:07,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:57:07,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:57:07,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:57:07,529 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:07,887 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:57:08,888 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:10,888 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:12,889 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:13,047 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:14,890 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:16,891 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:18,397 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:18,892 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:20,892 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:22,207 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:57:22,208 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:57:22,208 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:57:22,209 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:57:22,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:57:22,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:57:22,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:57:22,893 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:22,893 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:57:23,728 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:24,893 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:26,894 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:28,895 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:29,039 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:30,896 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:32,896 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:34,358 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:34,897 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:34,951 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:57:36,898 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:37,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:57:37,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:57:37,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:57:37,439 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:57:37,509 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:57:37,509 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:57:37,509 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:57:37,898 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:57:38,898 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:39,693 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:40,899 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:42,900 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:44,900 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:45,028 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:46,901 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:48,901 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:50,347 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:50,902 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:52,278 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:57:52,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:57:52,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:57:52,663 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:57:52,665 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:57:52,665 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:57:52,665 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:57:52,903 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:52,903 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:57:54,903 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:55,684 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:57:56,904 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:57:58,905 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:00,905 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:01,008 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:02,906 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:04,906 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:04,952 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:58:06,338 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:06,907 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:07,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:58:07,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:58:07,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:58:07,895 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:58:07,896 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:58:07,896 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:58:07,896 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:58:07,907 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:58:08,907 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:10,908 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:11,694 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:12,909 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:14,910 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:16,910 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:17,017 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:18,911 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:20,911 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:22,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:58:22,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:58:22,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:58:22,517 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:22,912 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:23,085 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:58:23,086 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:58:23,086 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:58:23,087 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:58:23,912 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:58:24,913 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:26,913 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:27,647 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:28,914 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:30,915 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:32,915 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:32,972 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:34,916 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:34,953 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:58:36,916 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:37,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:58:37,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:58:37,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:58:38,329 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:38,330 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:58:38,330 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:58:38,330 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:58:38,331 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:58:38,917 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:38,917 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:58:40,918 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:42,918 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:43,691 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:44,919 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:46,920 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:48,920 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:49,015 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:50,921 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:52,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:58:52,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:58:52,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:58:52,921 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:53,575 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:58:53,576 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:58:53,576 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:58:53,577 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:58:53,922 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:58:54,338 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:58:54,922 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:56,923 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:58,923 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:58:59,663 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:59:00,924 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:02,924 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:04,925 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:04,953 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:59:04,953 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:59:06,926 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:07,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:59:07,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:59:07,281 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:59:08,793 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: partial_history
+2024-12-02 14:59:08,794 DEBUG   SenderThread:9271 [sender.py:send():379] send: history
+2024-12-02 14:59:08,794 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: summary_record
+2024-12-02 14:59:08,794 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:59:08,926 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:08,926 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:59:10,323 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:59:10,927 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:12,927 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:14,928 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:15,643 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:59:16,929 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:18,929 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:20,930 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:20,971 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:59:22,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: stop_status
+2024-12-02 14:59:22,279 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:59:22,279 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: stop_status
+2024-12-02 14:59:22,930 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:23,780 DEBUG   SenderThread:9271 [sender.py:send():379] send: exit
+2024-12-02 14:59:23,780 INFO    SenderThread:9271 [sender.py:send_exit():586] handling exit code: 255
+2024-12-02 14:59:23,780 INFO    SenderThread:9271 [sender.py:send_exit():588] handling runtime: 468
+2024-12-02 14:59:23,780 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:59:23,780 INFO    SenderThread:9271 [sender.py:send_exit():594] send defer
+2024-12-02 14:59:23,780 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,780 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 0
+2024-12-02 14:59:23,781 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,781 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-12-02 14:59:23,781 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 1
+2024-12-02 14:59:23,781 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,781 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 1
+2024-12-02 14:59:23,781 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,781 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-12-02 14:59:23,781 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 2
+2024-12-02 14:59:23,781 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,781 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 2
+2024-12-02 14:59:23,781 INFO    HandlerThread:9271 [system_monitor.py:finish():203] Stopping system monitor
+2024-12-02 14:59:23,781 DEBUG   SystemMonitor:9271 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-12-02 14:59:23,781 INFO    HandlerThread:9271 [interfaces.py:finish():202] Joined cpu monitor
+2024-12-02 14:59:23,781 DEBUG   SystemMonitor:9271 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-12-02 14:59:23,781 INFO    HandlerThread:9271 [interfaces.py:finish():202] Joined disk monitor
+2024-12-02 14:59:23,819 INFO    HandlerThread:9271 [interfaces.py:finish():202] Joined gpu monitor
+2024-12-02 14:59:23,819 INFO    HandlerThread:9271 [interfaces.py:finish():202] Joined memory monitor
+2024-12-02 14:59:23,819 INFO    HandlerThread:9271 [interfaces.py:finish():202] Joined network monitor
+2024-12-02 14:59:23,819 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,819 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-12-02 14:59:23,819 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 3
+2024-12-02 14:59:23,820 DEBUG   SenderThread:9271 [sender.py:send():379] send: stats
+2024-12-02 14:59:23,820 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,820 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 3
+2024-12-02 14:59:23,820 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,820 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-12-02 14:59:23,820 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 4
+2024-12-02 14:59:23,820 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,820 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 4
+2024-12-02 14:59:23,820 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,820 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-12-02 14:59:23,820 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 5
+2024-12-02 14:59:23,820 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,820 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 5
+2024-12-02 14:59:23,821 DEBUG   SenderThread:9271 [sender.py:send():379] send: summary
+2024-12-02 14:59:23,821 INFO    SenderThread:9271 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-12-02 14:59:23,821 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,821 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-12-02 14:59:23,821 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 6
+2024-12-02 14:59:23,821 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,821 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 6
+2024-12-02 14:59:23,821 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,821 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-12-02 14:59:23,821 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 7
+2024-12-02 14:59:23,821 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: status_report
+2024-12-02 14:59:23,821 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:23,821 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 7
+2024-12-02 14:59:23,821 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:23,821 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-12-02 14:59:23,931 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:59:24,651 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 8
+2024-12-02 14:59:24,652 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:24,652 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 8
+2024-12-02 14:59:24,653 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:24,653 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-12-02 14:59:24,653 INFO    SenderThread:9271 [job_builder.py:build():318] Attempting to build job artifact
+2024-12-02 14:59:24,655 INFO    SenderThread:9271 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-12-02 14:59:24,684 INFO    SenderThread:9271 [job_builder.py:build():431] adding wandb-job metadata file
+2024-12-02 14:59:24,687 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 9
+2024-12-02 14:59:24,687 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:24,687 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 9
+2024-12-02 14:59:24,687 DEBUG   SenderThread:9271 [sender.py:send():379] send: artifact
+2024-12-02 14:59:24,780 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: poll_exit
+2024-12-02 14:59:24,931 INFO    Thread-12 :9271 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:26,141 INFO    wandb-upload_1:9271 [upload_job.py:push():89] Uploaded file /home/mallahova/.local/share/wandb/artifacts/staging/tmp0ieig_ma
+2024-12-02 14:59:26,269 INFO    wandb-upload_0:9271 [upload_job.py:push():89] Uploaded file /tmp/tmprljm4qdd/wandb-job.json
+2024-12-02 14:59:27,380 INFO    SenderThread:9271 [sender.py:send_artifact():1468] sent artifact job-https___github.com_MohammadrezaBanaei_LoRA-XS.git_main_glue_from_pretrained.py - {'id': 'QXJ0aWZhY3Q6MTM1NjkxMjc1OA==', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjUwMDE2NTE1Mw==', 'latestArtifact': None}}
+2024-12-02 14:59:27,380 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:27,380 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-12-02 14:59:27,380 INFO    SenderThread:9271 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-12-02 14:59:27,932 INFO    SenderThread:9271 [dir_watcher.py:finish():388] scan: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files
+2024-12-02 14:59:27,932 INFO    SenderThread:9271 [dir_watcher.py:finish():402] scan save: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/conda-environment.yaml conda-environment.yaml
+2024-12-02 14:59:27,932 INFO    SenderThread:9271 [dir_watcher.py:finish():402] scan save: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-metadata.json wandb-metadata.json
+2024-12-02 14:59:27,932 INFO    SenderThread:9271 [dir_watcher.py:finish():402] scan save: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/config.yaml config.yaml
+2024-12-02 14:59:27,932 INFO    SenderThread:9271 [dir_watcher.py:finish():402] scan save: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json wandb-summary.json
+2024-12-02 14:59:27,933 INFO    SenderThread:9271 [dir_watcher.py:finish():402] scan save: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log output.log
+2024-12-02 14:59:27,934 INFO    SenderThread:9271 [dir_watcher.py:finish():402] scan save: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/requirements.txt requirements.txt
+2024-12-02 14:59:27,937 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 10
+2024-12-02 14:59:27,938 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: poll_exit
+2024-12-02 14:59:27,938 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:27,940 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 10
+2024-12-02 14:59:27,940 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:27,940 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-12-02 14:59:27,940 INFO    SenderThread:9271 [file_pusher.py:finish():172] shutting down file pusher
+2024-12-02 14:59:28,355 INFO    wandb-upload_2:9271 [upload_job.py:push():131] Uploaded file /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/config.yaml
+2024-12-02 14:59:28,362 INFO    wandb-upload_1:9271 [upload_job.py:push():131] Uploaded file /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/conda-environment.yaml
+2024-12-02 14:59:28,451 INFO    wandb-upload_3:9271 [upload_job.py:push():131] Uploaded file /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/output.log
+2024-12-02 14:59:28,451 INFO    wandb-upload_4:9271 [upload_job.py:push():131] Uploaded file /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/requirements.txt
+2024-12-02 14:59:28,452 INFO    wandb-upload_0:9271 [upload_job.py:push():131] Uploaded file /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/files/wandb-summary.json
+2024-12-02 14:59:28,652 INFO    Thread-11 :9271 [sender.py:transition_state():614] send defer: 11
+2024-12-02 14:59:28,652 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:28,652 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 11
+2024-12-02 14:59:28,653 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:28,653 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-12-02 14:59:28,653 INFO    SenderThread:9271 [file_pusher.py:join():178] waiting for file pusher
+2024-12-02 14:59:28,653 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 12
+2024-12-02 14:59:28,653 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:28,653 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 12
+2024-12-02 14:59:28,653 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:28,653 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-12-02 14:59:28,653 INFO    SenderThread:9271 [file_stream.py:finish():614] file stream finish called
+2024-12-02 14:59:28,781 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: poll_exit
+2024-12-02 14:59:29,361 INFO    SenderThread:9271 [file_stream.py:finish():618] file stream finish is done
+2024-12-02 14:59:29,361 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 13
+2024-12-02 14:59:29,361 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: poll_exit
+2024-12-02 14:59:29,362 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:29,362 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 13
+2024-12-02 14:59:29,362 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:29,362 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-12-02 14:59:29,362 INFO    SenderThread:9271 [sender.py:transition_state():614] send defer: 14
+2024-12-02 14:59:29,362 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: defer
+2024-12-02 14:59:29,362 INFO    HandlerThread:9271 [handler.py:handle_request_defer():172] handle defer: 14
+2024-12-02 14:59:29,362 DEBUG   SenderThread:9271 [sender.py:send():379] send: final
+2024-12-02 14:59:29,362 DEBUG   SenderThread:9271 [sender.py:send():379] send: footer
+2024-12-02 14:59:29,362 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: defer
+2024-12-02 14:59:29,362 INFO    SenderThread:9271 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-12-02 14:59:29,363 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: poll_exit
+2024-12-02 14:59:29,363 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: poll_exit
+2024-12-02 14:59:29,363 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: poll_exit
+2024-12-02 14:59:29,363 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: poll_exit
+2024-12-02 14:59:29,364 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: server_info
+2024-12-02 14:59:29,364 DEBUG   SenderThread:9271 [sender.py:send_request():406] send_request: server_info
+2024-12-02 14:59:29,365 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: get_summary
+2024-12-02 14:59:29,366 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: sampled_history
+2024-12-02 14:59:29,366 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: internal_messages
+2024-12-02 14:59:29,522 INFO    MainThread:9271 [wandb_run.py:_footer_history_summary_info():3936] rendering history
+2024-12-02 14:59:29,522 INFO    MainThread:9271 [wandb_run.py:_footer_history_summary_info():3968] rendering summary
+2024-12-02 14:59:29,523 INFO    MainThread:9271 [wandb_run.py:_footer_sync_info():3895] logging synced files
+2024-12-02 14:59:29,523 DEBUG   HandlerThread:9271 [handler.py:handle_request():146] handle_request: shutdown
+2024-12-02 14:59:29,523 INFO    HandlerThread:9271 [handler.py:finish():866] shutting down handler
+2024-12-02 14:59:30,364 INFO    WriterThread:9271 [datastore.py:close():296] close: /home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS/wandb/run-20241202_145134-k2er7qiv/run-k2er7qiv.wandb
+2024-12-02 14:59:30,522 INFO    SenderThread:9271 [sender.py:finish():1546] shutting down sender
+2024-12-02 14:59:30,522 INFO    SenderThread:9271 [file_pusher.py:finish():172] shutting down file pusher
+2024-12-02 14:59:30,522 INFO    SenderThread:9271 [file_pusher.py:join():178] waiting for file pusher

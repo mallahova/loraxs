@@ -1,0 +1,161 @@
+
+
+
+
+
+
+
+  0%|                                                                                                            | 19/23380 [00:13<4:33:30,  1.42it/s]
+
+
+
+
+
+
+
+  0%|▏                                                                                                           | 39/23380 [00:27<4:36:07,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▎                                                                                                           | 59/23380 [00:41<4:36:23,  1.41it/s]
+
+
+
+
+
+
+
+  0%|▎                                                                                                           | 78/23380 [00:55<4:36:29,  1.40it/s]
+
+
+
+
+
+
+
+  0%|▍                                                                                                           | 98/23380 [01:09<4:36:18,  1.40it/s]
+
+
+
+
+
+
+
+  1%|▌                                                                                                          | 118/23380 [01:23<4:34:35,  1.41it/s]
+
+
+
+
+
+
+
+  1%|▋                                                                                                          | 138/23380 [01:37<4:35:10,  1.41it/s]
+
+
+
+
+  1%|▋                                                                                                          | 150/23380 [01:46<4:35:44,  1.40it/s][INFO|trainer.py:786] 2024-12-03 21:05:10,236 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:3614] 2024-12-03 21:05:10,239 >> ***** Running Evaluation *****
+[INFO|trainer.py:3616] 2024-12-03 21:05:10,239 >>   Num examples = 408
+[INFO|trainer.py:3619] 2024-12-03 21:05:10,239 >>   Batch size = 8
+
+
+
+
+
+
+
+[INFO|trainer.py:786] 2024-12-03 21:05:34,252 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:05:46,234 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:05:58,233 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:06:10,245 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:06:22,261 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:06:34,276 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:06:46,292 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:06:58,307 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:07:10,317 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:07:22,335 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:07:34,360 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:07:46,372 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:07:58,382 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:08:10,392 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+[INFO|trainer.py:786] 2024-12-03 21:08:22,407 >> The following columns in the evaluation set don't have a corresponding argument in `PeftModelForSequenceClassification.forward` and have been ignored: idx, sentence1, sentence2. If idx, sentence1, sentence2 are not expected by `PeftModelForSequenceClassification.forward`,  you can safely ignore this message.
+{'accuracy': 0.6985294117647058, 'f1': 0.7474332648870637, 'combined_score': 0.7229813383258847, 'accuracy_10': 0.6691176470588235, 'accuracy_11': 0.6666666666666666, 'accuracy_12': 0.678921568627451, 'accuracy_13': 0.6887254901960784, 'accuracy_14': 0.6887254901960784, 'accuracy_15': 0.6985294117647058, 'accuracy_16': 0.6911764705882353, 'accuracy_17': 0.6887254901960784, 'accuracy_18': 0.6862745098039216, 'accuracy_19': 0.6887254901960784, 'accuracy_20': 0.696078431372549, 'accuracy_21': 0.6985294117647058, 'accuracy_22': 0.7034313725490197, 'accuracy_23': 0.696078431372549, 'accuracy_24': 0.7034313725490197, 'accuracy_25': 0.6985294117647058}
+{'eval_loss': 0.6325098872184753, 'eval_accuracy': 0.6985294117647058, 'eval_f1': 0.7474332648870637, 'eval_combined_score': 0.7229813383258847, 'eval_accuracy_10': 0.6691176470588235, 'eval_accuracy_11': 0.6666666666666666, 'eval_accuracy_12': 0.678921568627451, 'eval_accuracy_13': 0.6887254901960784, 'eval_accuracy_14': 0.6887254901960784, 'eval_accuracy_15': 0.6985294117647058, 'eval_accuracy_16': 0.6911764705882353, 'eval_accuracy_17': 0.6887254901960784, 'eval_accuracy_18': 0.6862745098039216, 'eval_accuracy_19': 0.6887254901960784, 'eval_accuracy_20': 0.696078431372549, 'eval_accuracy_21': 0.6985294117647058, 'eval_accuracy_22': 0.7034313725490197, 'eval_accuracy_23': 0.696078431372549, 'eval_accuracy_24': 0.7034313725490197, 'eval_accuracy_25': 0.6985294117647058, 'eval_runtime': 204.1884, 'eval_samples_per_second': 1.998, 'eval_steps_per_second': 0.25, 'epoch': 0.45}
+
+
+  1%|▋                                                                                                         | 157/23380 [05:15<51:08:09,  7.93s/it]
+
+
+
+
+
+
+
+
+  1%|▊                                                                                                          | 179/23380 [05:31<4:46:04,  1.35it/s]
+
+
+
+
+
+
+
+  1%|▉                                                                                                          | 198/23380 [05:45<4:37:27,  1.39it/s]
+
+
+
+
+
+
+
+  1%|▉                                                                                                          | 218/23380 [06:00<4:42:04,  1.37it/s]
+
+
+
+
+
+  1%|█                                                                                                          | 233/23380 [06:10<4:39:08,  1.38it/s]Traceback (most recent call last):
+  File "my_experiments/tasks/task1/rank_dropout.py", line 1017, in <module>
+    main()
+  File "my_experiments/tasks/task1/rank_dropout.py", line 906, in main
+    train_result = trainer.train(resume_from_checkpoint=checkpoint)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 1859, in train
+    return inner_training_loop(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 2203, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3138, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3161, in compute_loss
+    outputs = model(**inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/peft_model.py", line 937, in forward
+    return self.base_model(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/tuners/tuners_utils.py", line 161, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 1203, in forward
+    logits = self.classifier(sequence_output)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/peft/utils/other.py", line 243, in forward
+    return self.modules_to_save[self.active_adapter](*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/models/roberta/modeling_roberta.py", line 1435, in forward
+    x = torch.tanh(x)
+KeyboardInterrupt

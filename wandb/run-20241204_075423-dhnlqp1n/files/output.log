@@ -1,0 +1,50 @@
+
+
+ 94%|██████████████████████████████████████████████████████████████████████████████████████████████████▉      | 22019/23380 [00:13<00:01, 1167.92it/s]
+
+ 94%|██████████████████████████████████████████████████████████████████████████████████████████████████▉      | 22020/23380 [00:14<00:01, 1085.74it/s]
+
+ 94%|███████████████████████████████████████████████████████████████████████████████████████████████████▉      | 22042/23380 [00:29<00:04, 332.62it/s][INFO|trainer.py:3614] 2024-12-04 07:54:56,956 >> ***** Running Evaluation *****
+[INFO|trainer.py:3616] 2024-12-04 07:54:56,956 >>   Num examples = 408
+[INFO|trainer.py:3619] 2024-12-04 07:54:56,956 >>   Batch size = 8
+
+
+
+
+
+ 92%|████████████████████████████████████████████████████████████████████████████████████████████████████████▏        | 47/51 [00:10<00:00,  4.25it/s]
+
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 51/51 [00:11<00:00,  4.25it/s]
+Computing accuracy for k=11
+Computing accuracy for k=12
+Computing accuracy for k=13
+Computing accuracy for k=14
+Computing accuracy for k=15
+Computing accuracy for k=16
+Computing accuracy for k=17
+Computing accuracy for k=18
+Computing accuracy for k=19
+Computing accuracy for k=20
+Computing accuracy for k=21
+Computing accuracy for k=22
+Computing accuracy for k=23
+Computing accuracy for k=24
+Computing accuracy for k=25
+{'accuracy': 0.696078431372549, 'f1': 0.8068535825545171, 'combined_score': 0.751466006963533, 'accuracy_10': 0.6862745098039216, 'accuracy_11': 0.6838235294117647, 'accuracy_12': 0.6813725490196079, 'accuracy_13': 0.6887254901960784, 'accuracy_14': 0.6887254901960784, 'accuracy_15': 0.6936274509803921, 'accuracy_16': 0.6911764705882353, 'accuracy_17': 0.6911764705882353, 'accuracy_18': 0.7009803921568627, 'accuracy_19': 0.7009803921568627, 'accuracy_20': 0.7034313725490197, 'accuracy_21': 0.6985294117647058, 'accuracy_22': 0.6985294117647058, 'accuracy_23': 0.7058823529411765, 'accuracy_24': 0.7009803921568627, 'accuracy_25': 0.696078431372549}
+  File "my_experiments/tasks/task1/rank_dropout.py", line 1027, in <module>
+    main()
+  File "my_experiments/tasks/task1/rank_dropout.py", line 916, in main
+    train_result = trainer.train(resume_from_checkpoint=checkpoint)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 1859, in train
+    return inner_training_loop(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 2203, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/transformers/trainer.py", line 3147, in training_step
+    self.accelerator.backward(loss)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/accelerate/accelerator.py", line 1966, in backward
+    loss.backward(**kwargs)
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/home/mallahova/miniconda3/envs/loraxs/lib/python3.8/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
