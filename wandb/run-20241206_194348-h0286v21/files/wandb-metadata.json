@@ -1,0 +1,138 @@
+{
+    "os": "Linux-6.8.0-48-generic-x86_64-with-glibc2.10",
+    "python": "3.8.13",
+    "heartbeatAt": "2024-12-06T18:43:49.567669",
+    "startedAt": "2024-12-06T18:43:48.790296",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--model_name_or_path",
+        "roberta-large",
+        "--lora_rank",
+        "25",
+        "--task_name",
+        "cola",
+        "--do_train",
+        "--do_eval",
+        "--seed",
+        "0",
+        "--max_seq_length",
+        "128",
+        "--per_device_train_batch_size",
+        "12",
+        "--learning_rate",
+        "0.001",
+        "--cls_learning_rate",
+        "0.005",
+        "--num_train_epochs",
+        "50",
+        "--save_steps",
+        "4000",
+        "--evaluation_strategy",
+        "epoch",
+        "--logging_steps",
+        "1",
+        "--overwrite_output_dir",
+        "--output_dir",
+        "results_cola_25"
+    ],
+    "state": "running",
+    "program": "main_glue.py",
+    "codePathLocal": "main_glue.py",
+    "codePath": "main_glue.py",
+    "git": {
+        "remote": "https://github.com/MohammadrezaBanaei/LoRA-XS.git",
+        "commit": "616c7726eb3959fb0ed201daceab2c5d3e084478"
+    },
+    "email": "alismalahova31@gmail.com",
+    "root": "/home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS",
+    "host": "mallahova",
+    "username": "mallahova",
+    "executable": "/home/mallahova/miniconda3/envs/loraxs/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3572.042,
+        "min": 800.0,
+        "max": 4500.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4100.0,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1044.503,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 784.372,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4100.0,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3747.944,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4100.0,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 2393.367,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 800.57,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4086.9,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 799.583,
+            "min": 800.0,
+            "max": 4500.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 195.48729705810547,
+            "used": 146.21767807006836
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3050 Laptop GPU",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 15.346954345703125
+    }
+}
