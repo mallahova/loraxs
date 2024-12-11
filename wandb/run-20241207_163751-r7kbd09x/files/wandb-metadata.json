@@ -1,0 +1,142 @@
+{
+    "os": "Linux-6.8.0-48-generic-x86_64-with-glibc2.10",
+    "python": "3.8.13",
+    "heartbeatAt": "2024-12-07T15:37:52.132746",
+    "startedAt": "2024-12-07T15:37:51.212283",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--model_name_or_path",
+        "roberta-large",
+        "--lora_rank",
+        "25",
+        "--task_name",
+        "cola",
+        "--do_train",
+        "--do_eval",
+        "--seed",
+        "0",
+        "--max_seq_length",
+        "128",
+        "--per_device_train_batch_size",
+        "12",
+        "--learning_rate",
+        "0.001",
+        "--cls_learning_rate",
+        "0.005",
+        "--num_train_epochs",
+        "120",
+        "--save_steps",
+        "4000",
+        "--evaluation_strategy",
+        "epoch",
+        "--logging_steps",
+        "20",
+        "--overwrite_output_dir",
+        "--output_dir",
+        "results_cola_25",
+        "--k_min",
+        "10",
+        "--k_max",
+        "25"
+    ],
+    "state": "running",
+    "program": "my_experiments/tasks/task1/from_scratch/rank_dropout.py",
+    "codePathLocal": "my_experiments/tasks/task1/from_scratch/rank_dropout.py",
+    "codePath": "my_experiments/tasks/task1/from_scratch/rank_dropout.py",
+    "git": {
+        "remote": "https://github.com/MohammadrezaBanaei/LoRA-XS.git",
+        "commit": "0631d707ed98e2be1ae2524c00bfb0bbc33bdf11"
+    },
+    "email": "alismalahova31@gmail.com",
+    "root": "/home/mallahova/code/basics/projects/uj/lora_xs/LoRA-XS",
+    "host": "mallahova",
+    "username": "mallahova",
+    "executable": "/home/mallahova/miniconda3/envs/loraxs/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3588.4425833333335,
+        "min": 800.0,
+        "max": 4500.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2746.319,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3166.074,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4300.0,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3803.561,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 2898.023,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 801.571,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4271.029,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4042.764,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1999.498,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3902.467,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 4099.953,
+            "min": 800.0,
+            "max": 4500.0
+        },
+        {
+            "current": 798.944,
+            "min": 800.0,
+            "max": 4500.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 195.48729705810547,
+            "used": 146.31797409057617
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3050 Laptop GPU",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 15.346954345703125
+    }
+}

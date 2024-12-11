@@ -332,7 +332,6 @@ def main():
         reconstr_config = yaml.load(stream, Loader=yaml.FullLoader)
     reconstr_type = reconstr_config["reconstruction_type"]
     reconstr_config[reconstr_type]["rank"] = peft_config_dict[adapter_name].r
-    print(f"ischakpoint {bool(checkpoint_args.checkpoint_dir)}---------------------------------------------")
     if not checkpoint_args.checkpoint_dir:
         training_args.output_dir = f"{training_args.output_dir}/{model_args.model_name_or_path}/{data_args.task_name}/pretrained_LoRA_init_{reconstr_type}_rank_{peft_config_dict[adapter_name].r}_lr_{training_args.learning_rate}_clsLR_{model_args.cls_lr}_seed_{training_args.seed}/{now}"
         os.makedirs(training_args.output_dir, exist_ok=False)
@@ -539,14 +538,6 @@ def main():
     #                          lora_alpha=model_args.lora_alpha, lora_dropout=0.0)
 
     model = get_peft_model(model, peft_config)
-
-
-
-
-
-
-
-
 
 
     ### Added code
@@ -923,7 +914,7 @@ def main():
                 correct += (predictions == labels).sum().item()
                 total += labels.size(0)
 
-                accuracy = correct / total
+            accuracy = correct / total
                     
             for name, param in model.named_parameters():
                 if param.requires_grad and param.shape == (rank, rank):
