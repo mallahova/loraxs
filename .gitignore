@@ -1,9 +1,0 @@
-checkpoint-*
-adapter_model.safetensors
-model_checkpoints
-wandb
-.gitignore
-task1
-.vscode
-experiments
-tasks/temp
