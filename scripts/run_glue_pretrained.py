@@ -9,8 +9,8 @@ def glue_main(args):
 
     mnli_models_path = "model_checkpoints/RoBERTa-large/MNLI"
 
-    for seed in [0]:
-        for rank in [25]:
+    for seed in [0, 1, 2, 3, 4]:
+        for rank in [4, 8, 12, 16, 20, 25]:
             mnli_trained_model = os.path.join(mnli_models_path, f"rank_{rank}")
             results_dir = f'results_{task}_{rank}'
             for classifier_LR in [6e-4, 1e-3]:
@@ -25,13 +25,12 @@ def glue_main(args):
                              --do_eval \
                              --seed {seed}\
                              --max_seq_length 128 \
-                             --per_device_train_batch_size 12 \
+                             --per_device_train_batch_size 32 \
                              --learning_rate {learning_rate} \
                              --cls_lr {classifier_LR}\
                              --num_train_epochs {epoch} \
                              --save_steps -1 \
-                             --evaluation_strategy steps  \
-                             --eval_steps 1 \
+                             --evaluation_strategy epoch  \
                              --logging_steps 20 \
                              --mnli_model_path "{mnli_trained_model}"\
                              --overwrite_output_dir \
