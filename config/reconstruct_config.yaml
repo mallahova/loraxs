@@ -3,6 +3,7 @@ reconstr_mode: "separated"
 half_init_dec: False
 replacement_module_random_init: False
 r_squared: True
+rank_masking: True
 svd:
   n_iter: 10
   random_state: 42
