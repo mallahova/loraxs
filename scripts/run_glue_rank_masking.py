@@ -13,7 +13,7 @@ def glue_main(args):
         for lr in [1e-3]:
             for cls_lr in [5e-3]:
                 for seed in seeds:
-                    run_str = f'''CUDA_VISIBLE_DEVICES="0" \
+                    run_str = f'''
                        WANDB_DISABLED="{wandb_disabled}" \
                        python main_glue_rank_masking.py \
                          --model_name_or_path {model_name} \
@@ -27,7 +27,7 @@ def glue_main(args):
                          --learning_rate {lr} \
                          --cls_learning_rate {cls_lr} \
                          --num_train_epochs {epoch} \
-                         --save_steps 71300 \
+                         --save_steps 13400 \
                          --evaluation_strategy epoch  \
                          --logging_steps 1 \
                          --overwrite_output_dir \
