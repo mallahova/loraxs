@@ -123,8 +123,6 @@ def find_and_initialize(
     :param reconstr_type: options: 'svd'
     """
     rank_masking = reconstruct_config.get("rank_masking", False)
-    if rank_masking:
-        print("Using rank masking")
     half_init_dec = reconstruct_config["half_init_dec"]
     replacement_module_random_init = reconstruct_config[
         "replacement_module_random_init"
@@ -186,15 +184,6 @@ def find_and_initialize(
                         replace_module_weights(
                             target.lora_A.default, replacement_encoder_weight.T
                         )
-                        target.default_lora_latent_mapping = torch.nn.Linear(
-                            lora_config.r, lora_config.r, bias=False
-                        )
-                        init_module_weights(
-                            target.default_lora_latent_mapping, sigma=0.00001
-                        )
-                        target.default_lora_latent_mapping.to(
-                            target.lora_A.default.weight.device
-                        )
 
                         if rank_masking:
                             target.default_lora_latent_mapping = WeightMaskingLinear(
@@ -204,6 +193,19 @@ def find_and_initialize(
                             target.default_lora_latent_mapping = torch.nn.Linear(
                                 lora_config.r, lora_config.r, bias=False
                             )
+
+                        init_module_weights(
+                            target.default_lora_latent_mapping, sigma=0.00001
+                        )
+                        target.default_lora_latent_mapping.to(
+                            target.lora_A.default.weight.device
+                        )
+                        target.lora_A.default.weight.requires_grad = (
+                            False  # only the r*r matrix will be tuned
+                        )
+                        target.lora_B.default.weight.requires_grad = (
+                            False  # only the r*r matrix will be tuned
+                        )
 
                     else:
                         init_module_weights(target.lora_A.default, sigma=0.00001)
