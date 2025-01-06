@@ -16,45 +16,37 @@ class WeightMaskingLinear(torch.nn.Linear):
     """
     A Linear layer with dynamic masking applied to its weights.
     """
+
     def __init__(self, in_features, out_features, bias=True):
         super().__init__(in_features, out_features, bias)
-        self.register_buffer("mask", None)
+        self.register_buffer("mask", torch.ones_like(self.weight))
 
-    def set_mask(self, mask):
-        if not torch.is_tensor(mask):
-            raise TypeError(f"Mask must be a torch.Tensor, but got {type(mask)}.")
-        
-        if mask.shape != self.weight.shape:
+    def set_mask(self, mask_size):
+        if mask_size > self.weight.shape[0]:
             raise ValueError(
-                f"Mask shape {mask.shape} does not match weight shape {self.weight.shape}."
+                f"Mask size {mask_size} is bigger than the weight shape {self.weight.shape[0]}."
             )
-        
-        self.mask = self.mask.to(self.weight.device)  
+        self.mask[:, :] = 0
+        self.mask[:mask_size, :mask_size] = 1
 
     def reset_mask(self):
-        self.mask = None
+        self.mask[:, :] = 1
 
     def forward(self, input):
         """
         Apply the mask and compute the forward pass.
         """
-        if self.mask is not None:
-            self.mask = self.mask.to(self.weight.device)  
-            masked_weight = self.weight * self.mask
-        else:
-            masked_weight = self.weight
-
+        masked_weight = self.weight * self.mask
         return torch.nn.functional.linear(input, masked_weight, self.bias)
 
 
-
-def set_rank_mask(model, mask):
+def set_rank_mask(model, mask_size):
     """
     Set the mask for all WeightMaskingLinear layers in the model.
     """
     for _, module in model.named_modules():
         if isinstance(module, WeightMaskingLinear):
-            module.set_mask(mask)
+            module.set_mask(mask_size)
 
 
 def reset_rank_mask(model):
@@ -68,10 +60,13 @@ def reset_rank_mask(model):
 
 def get_replacement_module(weight, module_name, type, writer, reconstruct_config):
     cfg = reconstruct_config[type]
-    if type == 'svd':
-        reconstructed_matrix, enc, dec = get_linear_rec_svd(weight.cpu().detach().numpy(), cfg['rank'],
-                                                            cfg['n_iter'],
-                                                            cfg['random_state'])
+    if type == "svd":
+        reconstructed_matrix, enc, dec = get_linear_rec_svd(
+            weight.cpu().detach().numpy(),
+            cfg["rank"],
+            cfg["n_iter"],
+            cfg["random_state"],
+        )
         final_enc = torch.tensor(enc, dtype=weight.dtype, device=weight.device)
         final_dec = torch.tensor(dec, dtype=weight.dtype, device=weight.device)
     else:
@@ -111,28 +106,34 @@ def update_decoder_weights(target_module, new_weight):
 
 def kaiming_uniform_init_lower_half(matrix: torch.tensor):
     rows, _ = matrix.size()
-    init.kaiming_uniform_(matrix[math.ceil(rows / 2):, :], a=math.sqrt(5))
+    init.kaiming_uniform_(matrix[math.ceil(rows / 2) :, :], a=math.sqrt(5))
     return matrix
+
 
 def kaiming_uniform_init(matrix: torch.tensor):
     init.kaiming_uniform_(matrix, a=math.sqrt(5))
     return matrix
-  
-def find_and_initialize(model, peft_config, adapter_name, reconstr_type, reconstruct_config, writer):
+
+
+def find_and_initialize(
+    model, peft_config, adapter_name, reconstr_type, reconstruct_config, writer
+):
     """
     :param adapter_name: options: 'default'
     :param reconstr_type: options: 'svd'
     """
-    rank_masking = reconstruct_config.get(
-        "rank_masking", False
-    )
+    rank_masking = reconstruct_config.get("rank_masking", False)
     if rank_masking:
         print("Using rank masking")
-    half_init_dec = reconstruct_config['half_init_dec']
-    replacement_module_random_init = reconstruct_config['replacement_module_random_init']
-    reconstruction_mode = reconstruct_config['reconstr_mode']
+    half_init_dec = reconstruct_config["half_init_dec"]
+    replacement_module_random_init = reconstruct_config[
+        "replacement_module_random_init"
+    ]
+    reconstruction_mode = reconstruct_config["reconstr_mode"]
     lora_config = peft_config[adapter_name]
-    r_squared = reconstruct_config['r_squared']  # whether using r*r matrix between lora_A and lora_B or not
+    r_squared = reconstruct_config[
+        "r_squared"
+    ]  # whether using r*r matrix between lora_A and lora_B or not
     loaded_in_8bit = getattr(model, "is_loaded_in_8bit", False)
     if loaded_in_8bit and not is_bnb_available():
         raise ImportError(
@@ -141,24 +142,32 @@ def find_and_initialize(model, peft_config, adapter_name, reconstr_type, reconst
         )
     is_target_modules_in_base_model = False
     key_list = [key for key, _ in model.named_modules()]
-    assert (not isinstance(lora_config.target_modules, str))
+    assert not isinstance(lora_config.target_modules, str)
     print("Iterating through model's specified modules to initialize A/B matrices.")
     for key in tqdm(key_list):
-        target_module_found = any(key.endswith(target_key) for target_key in lora_config.target_modules)
+        target_module_found = any(
+            key.endswith(target_key) for target_key in lora_config.target_modules
+        )
         if target_module_found:
             if not is_target_modules_in_base_model:
                 is_target_modules_in_base_model = True
             _, target, target_name = _get_submodules(model, key)
 
-            if reconstruction_mode == 'separated':
-                replacement_encoder_weight, replacement_decoder_weight = get_replacement_module(weight=target.weight.T,
-                                                                                                module_name=key,
-                                                                                                type=reconstr_type,
-                                                                                                writer=writer,
-                                                                                                reconstruct_config=reconstruct_config)
+            if reconstruction_mode == "separated":
+                replacement_encoder_weight, replacement_decoder_weight = (
+                    get_replacement_module(
+                        weight=target.weight.T,
+                        module_name=key,
+                        type=reconstr_type,
+                        writer=writer,
+                        reconstruct_config=reconstruct_config,
+                    )
+                )
 
                 if not isinstance(target, peft.tuners.lora.Linear):
-                    raise NotImplementedError('Only initialization for peft.tuners.lora.Linear type is implemented.')
+                    raise NotImplementedError(
+                        "Only initialization for peft.tuners.lora.Linear type is implemented."
+                    )
                     # TODO implement for Linear8bitLt
                 else:
                     if half_init_dec:
@@ -166,14 +175,26 @@ def find_and_initialize(model, peft_config, adapter_name, reconstr_type, reconst
                     if replacement_module_random_init:
                         kaiming_uniform_init(replacement_encoder_weight)
                         kaiming_uniform_init(replacement_decoder_weight)
-                    replace_module_weights(target.lora_B.default, replacement_decoder_weight.T)
+                    replace_module_weights(
+                        target.lora_B.default, replacement_decoder_weight.T
+                    )
                     if r_squared:
                         target.forward = types.MethodType(forward_latent, target)
-                        target.get_delta_weight = types.MethodType(get_delta_weight, target)
-                        replace_module_weights(target.lora_A.default, replacement_encoder_weight.T)
-                        target.default_lora_latent_mapping = torch.nn.Linear(lora_config.r, lora_config.r, bias=False)
-                        init_module_weights(target.default_lora_latent_mapping, sigma=0.00001)
-                        target.default_lora_latent_mapping.to(target.lora_A.default.weight.device)
+                        target.get_delta_weight = types.MethodType(
+                            get_delta_weight, target
+                        )
+                        replace_module_weights(
+                            target.lora_A.default, replacement_encoder_weight.T
+                        )
+                        target.default_lora_latent_mapping = torch.nn.Linear(
+                            lora_config.r, lora_config.r, bias=False
+                        )
+                        init_module_weights(
+                            target.default_lora_latent_mapping, sigma=0.00001
+                        )
+                        target.default_lora_latent_mapping.to(
+                            target.lora_A.default.weight.device
+                        )
 
                         if rank_masking:
                             target.default_lora_latent_mapping = WeightMaskingLinear(
@@ -183,7 +204,6 @@ def find_and_initialize(model, peft_config, adapter_name, reconstr_type, reconst
                             target.default_lora_latent_mapping = torch.nn.Linear(
                                 lora_config.r, lora_config.r, bias=False
                             )
-
 
                     else:
                         init_module_weights(target.lora_A.default, sigma=0.00001)

@@ -49,7 +49,11 @@ from peft import (
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
-from utils.initialization_utils_rank_masking import find_and_initialize, set_rank_mask,reset_rank_mask
+from utils.initialization_utils_rank_masking import (
+    find_and_initialize,
+    set_rank_mask,
+    reset_rank_mask,
+)
 
 try:
     from torch.utils.tensorboard import SummaryWriter
@@ -287,7 +291,7 @@ def main():
     )
 
     now = datetime.datetime.now()
-    now=now.strftime("%Y-%m-%dT%H:%M:%S") + ("-%02d" % (now.microsecond / 10000))
+    now = now.strftime("%Y-%m-%dT%H:%M:%S") + ("-%02d" % (now.microsecond / 10000))
 
     adapter_name = "default"
     peft_config_dict = {}
@@ -462,9 +466,11 @@ def main():
     # In distributed training, the .from_pretrained methods guarantee that only one local process can concurrently
     # download model & vocab.
     config = AutoConfig.from_pretrained(
-        model_args.config_name
-        if model_args.config_name
-        else model_args.model_name_or_path,
+        (
+            model_args.config_name
+            if model_args.config_name
+            else model_args.model_name_or_path
+        ),
         num_labels=num_labels,
         finetuning_task=data_args.task_name,
         cache_dir=model_args.cache_dir,
@@ -472,9 +478,11 @@ def main():
         use_auth_token=True if model_args.use_auth_token else None,
     )
     tokenizer = AutoTokenizer.from_pretrained(
-        model_args.tokenizer_name
-        if model_args.tokenizer_name
-        else model_args.model_name_or_path,
+        (
+            model_args.tokenizer_name
+            if model_args.tokenizer_name
+            else model_args.model_name_or_path
+        ),
         cache_dir=model_args.cache_dir,
         use_fast=model_args.use_fast_tokenizer,
         revision=model_args.model_revision,
@@ -657,7 +665,7 @@ def main():
             max_eval_samples = min(len(eval_dataset), data_args.max_eval_samples)
             eval_dataset = eval_dataset.select(range(max_eval_samples))
 
-    if data_args.task_name == 'cola':
+    if data_args.task_name == "cola":
         eval_dataset = eval_dataset.remove_columns(["idx", "sentence"])
 
     if (
@@ -738,6 +746,7 @@ def main():
         num_warmup_steps=int(0.06 * max_train_steps),
         num_training_steps=max_train_steps,
     )
+
     def create_mask(matrix_size, mask_size):
         """
         Generate a square mask of size `mask_size`.
@@ -745,11 +754,12 @@ def main():
         mask = torch.zeros((matrix_size, matrix_size), requires_grad=False)
         mask[:mask_size, :mask_size] = 1
         return mask
-    
+
     class RankMaskingTrainer(Trainer):
         """
         Custom Trainer class to apply random or fixed masking during training and evaluation.
         """
+
         def __init__(self, eval_mask_sizes, *args, **kwargs):
             """
             :param eval_mask_sizes: List of mask sizes to use during evaluation.
@@ -757,24 +767,25 @@ def main():
             self.eval_mask_sizes = eval_mask_sizes
             super().__init__(*args, **kwargs)
 
-        def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"):
+        def evaluate(
+            self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"
+        ):
             """
             Evaluate the model with masks of varying sizes.
             """
             results = {}
             for mask_size in self.eval_mask_sizes:
-                mask=create_mask(model_args.lora_rank, mask_size)
-                set_rank_mask(self.model, mask)
+                set_rank_mask(self.model, mask_size)
                 logger.info(f"*** Evaluating with MASK_SIZE = {mask_size} ***")
-
                 mask_eval_result = super().evaluate(
                     eval_dataset=eval_dataset,
                     ignore_keys=ignore_keys,
-                    metric_key_prefix=f"{metric_key_prefix}_rank_{mask_size}"
+                    metric_key_prefix=f"{metric_key_prefix}_rank_{mask_size}",
                 )
-                
                 for key, value in mask_eval_result.items():
                     results[key] = value
+
+                reset_rank_mask(self.model)
             return results
 
         def training_step(self, model, inputs):
@@ -782,12 +793,11 @@ def main():
             Set a random mask size before each training step.
             """
             mask_size = random.choice(self.eval_mask_sizes)
-            mask=create_mask(model_args.lora_rank, mask_size)
-            set_rank_mask(model, mask)
+            set_rank_mask(model, mask_size)
             logger.info(f"*** Training with MASK_SIZE = {mask_size} ***")
             loss = super().training_step(model, inputs)
+            reset_rank_mask(self.model)
             return loss
-
 
     trainer = RankMaskingTrainer(
         eval_mask_sizes=list(range(10, 26)),  # Mask sizes from 10 to 25
@@ -924,4 +934,3 @@ def _mp_fn(index):
 
 if __name__ == "__main__":
     main()
-    
