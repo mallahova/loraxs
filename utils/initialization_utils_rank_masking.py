@@ -29,7 +29,7 @@ class WeightMaskingLinear(torch.nn.Linear):
                 f"Mask shape {mask.shape} does not match weight shape {self.weight.shape}."
             )
         
-        self.mask = mask.to(self.weight.device)  
+        self.mask = self.mask.to(self.weight.device)  
 
     def reset_mask(self):
         self.mask = None
@@ -39,6 +39,7 @@ class WeightMaskingLinear(torch.nn.Linear):
         Apply the mask and compute the forward pass.
         """
         if self.mask is not None:
+            self.mask = self.mask.to(self.weight.device)  
             masked_weight = self.weight * self.mask
         else:
             masked_weight = self.weight
