@@ -800,7 +800,7 @@ def main():
             return loss
 
     trainer = RankMaskingTrainer(
-        eval_mask_sizes=list(range(10, 26)),  # Mask sizes from 10 to 25
+        eval_mask_sizes=list(range(15, 26)),  # Mask sizes from 10 to 25
         model=model,
         args=training_args,
         train_dataset=train_dataset if training_args.do_train else None,

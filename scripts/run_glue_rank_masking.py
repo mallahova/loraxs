@@ -3,15 +3,15 @@ import os
 
 
 def glue_main(args):
-    epoch = 100
+    epoch = 40
     task = args.target_task  # should be one of COLA, SST2 and QNLI tasks
     model_name = "roberta-large"
     seeds = [int(args.seed)] if args.seed else [0, 1, 2, 3, 4]
     wandb_disabled = args.wandb_disabled
     for rank in [25]:
         results_dir = f"rank_masking_results_{task}_{rank}"
-        for lr in [1e-3]:
-            for cls_lr in [5e-3]:
+        for lr in [2e-3]:
+            for cls_lr in [1e-3]:
                 for seed in seeds:
                     run_str = f"""
                        WANDB_DISABLED="{wandb_disabled}" \
