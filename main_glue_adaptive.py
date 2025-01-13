@@ -290,6 +290,10 @@ class RankAllocaionArguments:
         default=0.,
         metadata={"help": "Tau value."}
     )
+    rank_allocation_learning_rate: float = field(
+        default=1e-2,
+        metadata={"help": "Tau value."}
+    )
 
 
 
@@ -746,6 +750,7 @@ def main():
         data_collator = DataCollatorWithPadding(tokenizer, pad_to_multiple_of=8)
     else:
         data_collator = None
+    
 
     optimizer = torch.optim.AdamW(
         [
@@ -757,9 +762,15 @@ def main():
             },
             {
                 "params": [
-                    i[1] for i in model.named_parameters() if "classifier" not in i[0]
+                    i[1] for i in model.named_parameters() if "classifier" not in i[0] and "rank_allocation_weights" not in i[0]
                 ],
                 "lr": training_args.learning_rate,
+            },
+            {
+                "params": [
+                    model.rank_allocation_weights
+                ],
+                "lr": rank_allocation_args.rank_allocation_learning_rate,
             },
         ]
     )
@@ -797,7 +808,7 @@ def main():
             self.memory_size=memory_size
             self.alpha=alpha_min
             self.alpha_max=alpha_max    
-            self.alpha_update=(alpha_max-alpha_min)/(self.args.num_train_epochs * len(self.get_train_dataloader()))
+            self.alpha_update=(alpha_max-alpha_min)/max_train_steps
             self.rank_allocation = None
 
         def update_alpha(self):

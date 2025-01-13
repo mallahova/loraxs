@@ -27,7 +27,7 @@ def glue_main(args):
                          --learning_rate {lr} \
                          --cls_learning_rate {cls_lr} \
                          --num_train_epochs {epoch} \
-                         --save_steps 13400 \
+                         --save_steps 6701 \
                          --evaluation_strategy epoch  \
                          --logging_steps 1 \
                          --overwrite_output_dir \
@@ -35,7 +35,7 @@ def glue_main(args):
                          --rank_min {args.rank_min} \
                          --rank_max {args.rank_max} \
                          --alpha_min {args.alpha_min} \
-                         --alpha_max {args.alpha_max}"""
+                         --rank_allocation_learning_rate {args.rank_allocation_learning_rate}"""
                     os.system(run_str)
 
 
@@ -46,6 +46,9 @@ if __name__ == "__main__":
     parser.add_argument("--rank_max", required=False, default=25)
     parser.add_argument("--alpha_min", required=False, default=0.5)
     parser.add_argument("--alpha_max", required=False, default=3)
+    parser.add_argument("--rank_allocation_learning_rate", required=False, default=1e-2)
+
+    
 
     parser.add_argument("--seed", required=False, default=None)
     parser.add_argument("--wandb_disabled", required=False, default=True)
