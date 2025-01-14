@@ -819,12 +819,26 @@ def main():
             Set a random mask size before each training step.
             """
             self.rank_allocation=get_rank_allocation(model.rank_allocation_weights,self.rank_min, self.memory_size)
-            set_rank_mask(model, self.rank_allocation, self.rank_min, self.rank_max, self.alpha)
+            set_rank_mask(model, self.rank_allocation, self.alpha)
             loss = super().training_step(model, inputs)
             self.log_rank_allocation()
             self.update_alpha()
             return loss
         
+        def evaluate(
+            self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"
+        ):
+            """
+            Evaluate the model with masks of varying sizes.
+            """
+            self.rank_allocation=get_rank_allocation(model.rank_allocation_weights, self.rank_min, self.memory_size)
+            set_rank_mask(model, self.rank_allocation, None)
+            return super().evaluate(
+                eval_dataset=eval_dataset,
+                ignore_keys=ignore_keys,
+                metric_key_prefix=metric_key_prefix,
+            )
+                
         def log_rank_allocation(self):
             """Log custom metrics to WandB."""
             self.log({

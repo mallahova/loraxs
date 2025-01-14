@@ -52,6 +52,12 @@ class WeightMaskingLinear(torch.nn.Linear):
             mask+= p[i - self.rank_min] * tensor
         return mask
     
+    def _create_discrete_mask(self):
+        mask=torch.zeros_like(self.weight)
+        discrete_rank = int(torch.round(self.s).item())
+        mask[:discrete_rank, :discrete_rank] = 1
+        return mask
+    
     def _prob_dist(self, s,alpha):
         logits=-alpha*torch.log(1+(s-self.ranks)**2)
         gumbel_dist = torch.distributions.Gumbel(0,1)
@@ -71,9 +77,12 @@ class WeightMaskingLinear(torch.nn.Linear):
         """
         Apply the mask and compute the forward pass.
         """
-        if self.s is not None and self.alpha is not None:
-            p=self._prob_dist(self.s,self.alpha).to(self.weight.device)
-            mask=self._create_mask(p)
+        if self.s is not None:
+            if self.alpha is not None:
+                p=self._prob_dist(self.s,self.alpha).to(self.weight.device)
+                mask=self._create_mask(p)
+            else:
+                mask=self._create_discrete_mask()
             masked_weight = self.weight * mask
             # self.visualize_matrix(mask.cpu().detach().numpy())
             # self.visualize_matrix(masked_weight.cpu().detach().numpy())
@@ -86,7 +95,7 @@ class WeightMaskingLinear(torch.nn.Linear):
         return torch.nn.functional.linear(input, masked_weight, self.bias)
 
 
-def set_rank_mask(model, rank_allocation: torch.Tensor,  rank_min, rank_max, alpha):
+def set_rank_mask(model, rank_allocation: torch.Tensor, alpha):
     """
     Set the mask for all WeightMaskingLinear layers in the model.
     """
