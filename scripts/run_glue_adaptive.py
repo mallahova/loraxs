@@ -23,7 +23,7 @@ def glue_main(args):
                          --do_eval \
                          --seed {seed}\
                          --max_seq_length 128 \
-                         --per_device_train_batch_size 8 \
+                         --per_device_train_batch_size 32 \
                          --learning_rate {lr} \
                          --cls_learning_rate {cls_lr} \
                          --num_train_epochs {epoch} \
