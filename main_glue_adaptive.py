@@ -269,6 +269,11 @@ class RankAllocaionArguments:
     memory_size: Optional[int] = field(
         default=None,
         metadata={"help": "The size of memory to allocate for the fine-tuning process."}
+    ),
+
+    rank_average: Optional[int] = field(
+        default=None,
+        metadata={"help": "The average rank that will determine memory_size."}
     )
     rank_min: int = field(
         default=15,
@@ -815,11 +820,16 @@ def main():
             self.alpha+=self.alpha_update
             
         def training_step(self, model, inputs):
-            """
-            Set a random mask size before each training step.
-            """
+            current_epoch = int(self.state.epoch or 0)
+            total_epochs = int(self.args.num_train_epochs)
+            is_last_epoch = current_epoch + 1 == total_epochs
+
             self.rank_allocation=get_rank_allocation(model.rank_allocation_weights,self.rank_min, self.memory_size)
-            set_rank_mask(model, self.rank_allocation, self.alpha)
+            if not is_last_epoch:
+                set_rank_mask(model, self.rank_allocation, self.alpha)
+            else:
+                self.rank_allocation=torch.round(self.rank_allocation).int()
+                set_rank_mask(model, self.rank_allocation, None)
             loss = super().training_step(model, inputs)
             self.log_rank_allocation()
             self.update_alpha()
@@ -848,7 +858,9 @@ def main():
 
     
     if rank_allocation_args.memory_size is None:
-        rank_allocation_args.memory_size=model.rank_allocation_weights.shape[0]*(((rank_allocation_args.rank_max+rank_allocation_args.rank_min)/2)**2) # enough memory for each weight matrix to havethe average rank
+        if rank_allocation_args.rank_average is None:
+            rank_allocation_args.rank_average=(rank_allocation_args.rank_max+rank_allocation_args.rank_min)/2
+        rank_allocation_args.memory_size=model.rank_allocation_weights.shape[0]*((rank_allocation_args.rank_average)**2) # enough memory for each weight matrix to havethe average rank
     trainer = RankMaskingTrainer(
         memory_size=rank_allocation_args.memory_size,
         rank_min=rank_allocation_args.rank_min,
