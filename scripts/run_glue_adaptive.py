@@ -4,12 +4,12 @@ import os
 
 def glue_main(args):
     epoch = 50
-    task = args.target_task  # should be one of COLA, SST2 and QNLI tasks
+    task = args.target_task      # should be one of COLA, SST2 and QNLI tasks
     model_name = "roberta-large"
     seeds = [int(args.seed)] if args.seed else [0, 1, 2, 3, 4]
     wandb_disabled = args.wandb_disabled
     for rank in [args.rank_max]:
-        results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}"
+        results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{args.seed}_{args.rank_allocation_learning_rate}"
         for lr in [1e-3]:
             for cls_lr in [5e-3]:
                 for seed in seeds:
@@ -47,9 +47,6 @@ if __name__ == "__main__":
     parser.add_argument("--alpha_min", required=False, default=0.5)
     parser.add_argument("--alpha_max", required=False, default=3)
     parser.add_argument("--rank_allocation_learning_rate", required=False, default=1e-2)
-
-    
-
     parser.add_argument("--seed", required=False, default=None)
     parser.add_argument("--wandb_disabled", required=False, default=True)
 
