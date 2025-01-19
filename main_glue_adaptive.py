@@ -266,12 +266,12 @@ class RankAllocaionArguments:
     Arguments for adaptive rank allocation
     """
 
-    memory_size: Optional[int] = field(
+    memory_size: int = field(
         default=None,
         metadata={"help": "The size of memory to allocate for the fine-tuning process."}
-    ),
+    )
 
-    rank_average: Optional[int] = field(
+    rank_average: int= field(
         default=None,
         metadata={"help": "The average rank that will determine memory_size."}
     )
@@ -859,7 +859,7 @@ def main():
     
     if rank_allocation_args.memory_size is None:
         if rank_allocation_args.rank_average is None:
-            rank_allocation_args.rank_average=(rank_allocation_args.rank_max+rank_allocation_args.rank_min)/2
+            rank_allocation_args.rank_average=(rank_allocation_args.rank_max+rank_allocation_args.rank_min)//2
         rank_allocation_args.memory_size=model.rank_allocation_weights.shape[0]*((rank_allocation_args.rank_average)**2) # enough memory for each weight matrix to havethe average rank
     trainer = RankMaskingTrainer(
         memory_size=rank_allocation_args.memory_size,

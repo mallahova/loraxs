@@ -7,9 +7,9 @@ def glue_main(args):
     model_name = "roberta-large"
     seeds = [int(args.seed)] if args.seed else [0, 1, 2, 3, 4]
     wandb_disabled = args.wandb_disabled
-    args.rank_average=args.rank_average if args.rank_average else (int(args.rank_max)+int(args.rank_min))/2
+    args.rank_average=args.rank_average if args.rank_average else (int(args.rank_max)+int(args.rank_min))//2
     for rank in [args.rank_max]:
-        results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{args.seed}_{args.rank_allocation_learning_rate}"
+        results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{args.seed}_{args.rank_allocation_learning_rate}_{args.rank_average}"
         for lr in [1e-3]:
             for cls_lr in [5e-3]:
                 for seed in seeds:
