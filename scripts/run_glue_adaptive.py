@@ -34,7 +34,7 @@ def glue_main(args):
                          --rank_min {args.rank_min} \
                          --rank_max {args.rank_max} \
                          --alpha_min {args.alpha_min} \
-                         --rank_allocation_learning_rate {args.rank_allocation_learning_rate}
+                         --rank_allocation_learning_rate {args.rank_allocation_learning_rate} \
                          --rank_average {args.rank_average}"""
                     os.system(run_str)
 
