@@ -3,11 +3,11 @@ import os
 
 
 def glue_main(args):
-    epoch = 50
     task = args.target_task      # should be one of COLA, SST2 and QNLI tasks
     model_name = "roberta-large"
     seeds = [int(args.seed)] if args.seed else [0, 1, 2, 3, 4]
     wandb_disabled = args.wandb_disabled
+    args.rank_average=args.rank_average if args.rank_average else (args.rank_max+args.rank_min)/2
     for rank in [args.rank_max]:
         results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{args.seed}_{args.rank_allocation_learning_rate}"
         for lr in [1e-3]:
@@ -26,7 +26,7 @@ def glue_main(args):
                          --per_device_train_batch_size {args.batch_size} \
                          --learning_rate {lr} \
                          --cls_learning_rate {cls_lr} \
-                         --num_train_epochs {epoch} \
+                         --num_train_epochs {args.epoch} \
                          --save_steps 6701 \
                          --evaluation_strategy epoch  \
                          --logging_steps 1 \
@@ -35,7 +35,8 @@ def glue_main(args):
                          --rank_min {args.rank_min} \
                          --rank_max {args.rank_max} \
                          --alpha_min {args.alpha_min} \
-                         --rank_allocation_learning_rate {args.rank_allocation_learning_rate}"""
+                         --rank_allocation_learning_rate {args.rank_allocation_learning_rate}
+                         --rank_average {args.rank_average}"""
                     os.system(run_str)
 
 
@@ -50,9 +51,8 @@ if __name__ == "__main__":
     parser.add_argument("--seed", required=False, default=None)
     parser.add_argument("--wandb_disabled", required=False, default=True)
     parser.add_argument("--batch_size", required=False, default=32)
-
-
-
+    parser.add_argument("--epoch", required=False, default=50)
+    parser.add_argument("--rank_average", required=False, default=None)
     args = parser.parse_args()
 
     glue_main(args)
