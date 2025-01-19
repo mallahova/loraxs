@@ -27,7 +27,6 @@ def glue_main(args):
                          --learning_rate {lr} \
                          --cls_learning_rate {cls_lr} \
                          --num_train_epochs {args.epoch} \
-                         --save_steps 6701 \
                          --evaluation_strategy epoch  \
                          --logging_steps 1 \
                          --overwrite_output_dir \
