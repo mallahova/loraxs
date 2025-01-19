@@ -7,7 +7,8 @@ task1
 experiments
 tasks/temp
 __pycache__
-sbatch.sh
+# sbatch.sh
 *_results_*
 wandb
 slurm-*.out
+results_*
