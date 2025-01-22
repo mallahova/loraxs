@@ -271,4 +271,4 @@ def find_and_initialize(
             f"Please check the target modules and try again."
         )
     if adaptive_rank_allocation:
-        model.register_parameter(name='rank_allocation_weights', param=torch.nn.Parameter(torch.zeros(target_modules_count)))
+        model.register_parameter(name='rank_allocation_weights', param=torch.nn.Parameter(torch.randn(target_modules_count)))
