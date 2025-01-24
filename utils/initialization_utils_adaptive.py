@@ -172,7 +172,10 @@ def find_and_initialize(
     :param adapter_name: options: 'default'
     :param reconstr_type: options: 'svd'
     """
+
     adaptive_rank_allocation = reconstruct_config.get("adaptive_rank_allocation", True)
+    rank_allocation_weights_init = reconstruct_config.get("rank_allocation_weights_init", None)
+
     half_init_dec = reconstruct_config["half_init_dec"]
     replacement_module_random_init = reconstruct_config[
         "replacement_module_random_init"
@@ -270,5 +273,29 @@ def find_and_initialize(
             f"Target modules {lora_config.target_modules} not found in the base model. "
             f"Please check the target modules and try again."
         )
+    
     if adaptive_rank_allocation:
-        model.register_parameter(name='rank_allocation_weights', param=torch.nn.Parameter(torch.randn(target_modules_count)))
+        if rank_allocation_weights_init == "uniform":
+            param=torch.nn.Parameter(torch.zeros(target_modules_count))
+        elif rank_allocation_weights_init == "quadratic":
+            center = target_modules_count // 2  # Center of the distribution (mean)
+            sigma = target_modules_count / (2 * (10) ** 0.5)
+            # Generate evenly spaced points
+            x = torch.linspace(0, target_modules_count - 1, steps=target_modules_count)
+            # Compute Gaussian function
+            param=torch.nn.Parameter(torch.exp(-((x - center) ** 2) / (2 * sigma ** 2)))
+        elif rank_allocation_weights_init=="left_skewed":
+            center = 3 * target_modules_count // 4  # Center the peak at 3/4n
+            sigma_left = 3*target_modules_count / (4 * (10) ** 0.5)  # Standard deviation for the left side
+            sigma_right = 1*target_modules_count / (4 * (10) ** 0.5)  # Standard deviation for the right side
+            # Generate evenly spaced points
+            x = torch.linspace(0, target_modules_count - 1, steps=target_modules_count)
+            # Compute left-skewed distribution
+            param=torch.nn.Parameter(torch.where(
+                x <= center,
+                torch.exp(-((x - center) ** 2) / (2 * sigma_left ** 2)),
+                torch.exp(-((x - center) ** 2) / (2 * sigma_right ** 2))
+            ))
+        else:
+            param=torch.nn.Parameter(torch.randn(target_modules_count))
+        model.register_parameter(name='rank_allocation_weights', param=param)
