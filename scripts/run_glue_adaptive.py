@@ -36,8 +36,10 @@ def glue_main(args):
                          --alpha_min {args.alpha_min} \
                          --rank_allocation_learning_rate {args.rank_allocation_learning_rate} \
                          --save_steps 0 \
-                         --rank_average {args.rank_average}"""
+                         --memory_size {args.memory_size} \
+                    """
                     os.system(run_str)
+                    print(run_str)
 
 
 if __name__ == "__main__":
@@ -53,6 +55,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", required=False, default=32)
     parser.add_argument("--epoch", required=False, default=50)
     parser.add_argument("--rank_average", required=False, default=None)
+    parser.add_argument("--memory_size", required=False, default=None)
     args = parser.parse_args()
 
     glue_main(args)
