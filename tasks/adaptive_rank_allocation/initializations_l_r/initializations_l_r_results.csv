@@ -19,3 +19,4 @@ adaptive_rank_allocation_left_skewed_init,cola,5.0,25.0,0.5,3.0,0.01,20.0,67.19 
 adaptive_rank_allocation_left_skewed_init,cola,5.0,25.0,0.5,3.0,0.001,20.0,67.16 ± 0.99
 adaptive_rank_allocation_left_skewed_init,cola,5.0,25.0,0.5,3.0,0.002,20.0,67.14 ± 0.92
 adaptive_rank_allocation_left_skewed_init,cola,5.0,25.0,0.5,3.0,0.02,20.0,65.56 ± 0.95
+90_percent_memory_experiment,cola,5.0,25.0,0.5,3.0,0.002,15.0,67.45 ± 0.43
