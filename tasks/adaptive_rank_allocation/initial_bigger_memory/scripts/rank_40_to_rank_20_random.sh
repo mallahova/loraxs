@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=adaptive_loraxs
-#SBATCH --partition=dgx
+#SBATCH --partition=student
 #SBATCH --qos=quick
 #SBATCH --gpus=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=5
 
 SEED=$1
 
