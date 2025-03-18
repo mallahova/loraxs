@@ -7,6 +7,12 @@ def glue_main(args):
     model_name = "roberta-large"
     seeds = [int(args.seed)] if args.seed else [0, 1, 2, 3, 4]
     wandb_disabled = args.wandb_disabled
+    if args.rank_max is None:
+        if args.rank_start is not None:
+            args.rank_max= args.rank_start
+        else:
+            args.rank_max=args.rank_average
+    args.rank_max=args.rank_max if args.rank_max else args.rank_average
     args.rank_average=args.rank_average if args.rank_average else (int(args.rank_max)+int(args.rank_min))//2
     for rank in [args.rank_max]:
         results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{args.seed}_{args.rank_allocation_learning_rate}_{args.rank_average}"
@@ -48,7 +54,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--target_task", required=False, default="cola")
     parser.add_argument("--rank_min", required=False, default=15)
-    parser.add_argument("--rank_max", required=False, default=25)
+    parser.add_argument("--rank_max", required=False, default=None)
     parser.add_argument("--alpha_min", required=False, default=0.5)
     parser.add_argument("--alpha_max", required=False, default=3)
     parser.add_argument("--rank_allocation_learning_rate", required=False, default=1e-2)
