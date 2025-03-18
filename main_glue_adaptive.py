@@ -299,7 +299,10 @@ class RankAllocaionArguments:
         default=1e-2,
         metadata={"help": "Tau value."}
     )
-
+    rank_start: int= field(
+        default=None,
+        metadata={"help": "The starting average rank that will determine initial memory_size."}
+    )
 
 
 def main():
@@ -803,7 +806,7 @@ def main():
         Custom Trainer class to apply random or fixed masking during training and evaluation.
         """
 
-        def __init__(self,memory_size,  rank_min=15, rank_max=25, alpha_min=0.5, alpha_max=3, *args, **kwargs):
+        def __init__(self,memory_size,  rank_min=15, rank_max=25, memory_end=25, alpha_min=0.5, alpha_max=3, *args, **kwargs):
             """
             :param eval_mask_sizes: List of mask sizes to use during evaluation.
             """
@@ -811,6 +814,10 @@ def main():
             self.rank_min = rank_min
             self.rank_max = rank_max
             self.memory_size=memory_size
+            self.memory_end=memory_end
+            self.memory=self.memory_size
+            # memory update: epochs 0-4: static memory_size, epochs 5-24: updates from memory_size to memory_end, epochs 25-49: static memory_end
+            self.memory_update=(memory_end-memory_size)/(max_train_steps-30*num_update_steps_per_epoch)
             self.alpha=alpha_min
             self.alpha_max=alpha_max    
             self.alpha_update=(alpha_max-alpha_min)/max_train_steps
@@ -818,13 +825,16 @@ def main():
 
         def update_alpha(self):
             self.alpha+=self.alpha_update
+
+        def update_memory(self):
+            self.memory+=self.memory_update
             
         def training_step(self, model, inputs):
             current_epoch = int(self.state.epoch or 0)
             total_epochs = int(self.args.num_train_epochs)
             is_last_epoch = current_epoch + 1 == total_epochs
 
-            self.rank_allocation=get_rank_allocation(model.rank_allocation_weights,self.rank_min, self.memory_size)
+            self.rank_allocation=get_rank_allocation(model.rank_allocation_weights,self.rank_min, self.memory)
             if not is_last_epoch:
                 set_rank_mask(model, self.rank_allocation, self.alpha)
             else:
@@ -832,6 +842,9 @@ def main():
                 set_rank_mask(model, self.rank_allocation, None)
             loss = super().training_step(model, inputs)
             self.log_rank_allocation()
+
+            if(current_epoch>=5 and current_epoch <25):
+                self.update_memory()
             self.update_alpha()
             return loss
         
@@ -841,7 +854,7 @@ def main():
             """
             Evaluate the model with masks of varying sizes.
             """
-            self.rank_allocation=get_rank_allocation(model.rank_allocation_weights, self.rank_min, self.memory_size)
+            self.rank_allocation=get_rank_allocation(model.rank_allocation_weights, self.rank_min, self.memory)
             set_rank_mask(model, self.rank_allocation, None)
             return super().evaluate(
                 eval_dataset=eval_dataset,
@@ -853,18 +866,24 @@ def main():
             """Log custom metrics to WandB."""
             self.log({
                 "alpha": self.alpha,
+                "memory": self.memory,
                 **{f"rank_allocation_{i}": rank for i, rank in enumerate(self.rank_allocation.tolist())}
             })
 
-    
+    if rank_allocation_args.rank_average is None:
+        rank_allocation_args.rank_average=(rank_allocation_args.rank_max+rank_allocation_args.rank_min)//2
+
+    if rank_allocation_args.rank_start is None:
+        rank_allocation_args.rank_start=rank_allocation_args.rank_average
+
     if rank_allocation_args.memory_size is None:
-        if rank_allocation_args.rank_average is None:
-            rank_allocation_args.rank_average=(rank_allocation_args.rank_max+rank_allocation_args.rank_min)//2
-        rank_allocation_args.memory_size=model.rank_allocation_weights.shape[0]*((rank_allocation_args.rank_average)**2) # enough memory for each weight matrix to havethe average rank
+        rank_allocation_args.memory_size=model.rank_allocation_weights.shape[0]*((rank_allocation_args.rank_start)**2) # enough memory for each weight matrix to havethe average rank
+    memory_end=rank_allocation_args.rank_average**2*model.rank_allocation_weights.shape[0]
     trainer = RankMaskingTrainer(
         memory_size=rank_allocation_args.memory_size,
         rank_min=rank_allocation_args.rank_min,
         rank_max=rank_allocation_args.rank_max,
+        memory_end=memory_end,
         alpha_min=rank_allocation_args.alpha_min,
         alpha_max=rank_allocation_args.alpha_max,
         model=model,
