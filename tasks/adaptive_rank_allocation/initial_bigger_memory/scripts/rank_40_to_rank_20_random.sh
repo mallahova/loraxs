@@ -3,7 +3,7 @@
 #SBATCH --partition=dgx
 #SBATCH --qos=normal
 #SBATCH --gpus=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=8
 
 SEED=$1
 
