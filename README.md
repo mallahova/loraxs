@@ -1,16 +1,25 @@
-# LoRA-XS: Low-Rank Adaptation with Extremely Small Number of Parameters
+# AdaLoRA + LoRA-XS
+This repository is based on the [**LoRA-XS**](https://github.com/MohammadrezaBanaei/LoRA-XS) paper repository and extends it by integrating AdaLoRA for improved adaptability and parameter efficiency.  
 
-Code for the paper: "[LoRA-XS: Low-Rank Adaptation with Extremely Small Number of Parameters](https://arxiv.org/abs/2405.17604)"
+LoRA-XS builds upon the concept of low-rank adaptation, significantly reducing the number of trainable parameters by introducing a small `r x r` weight matrix between frozen low-rank matrices derived from Singular Value Decomposition (SVD) of the original weight matrices. AdaLoRA, on the other hand, dynamically allocates parameter budgets based on the importance of weight matrices.
 
-## Introduction
-We introduce LoRA-XS (**Lo**w-**R**ank **A**daptation with e**X**tremely **S**mall number of parameters), a novel approach leveraging Singular Value Decomposition (SVD) for parameter-efficient fine-tuning. LoRA-XS introduces a small r x r weight matrix between frozen LoRA matrices, which are constructed by SVD of the original weight matrix. Training only r x r weight matrices ensures independence from model dimensions, enabling more parameter-efficient fine-tuning, especially for larger models. LoRA-XS achieves a remarkable reduction of trainable parameters by over 100x in 7B models compared to LoRA. Our benchmarking across various scales, including GLUE, GSM8k, and MATH benchmarks, shows that our approach outperforms LoRA and recent state-of-the-art approaches like VeRA in terms of parameter efficiency while maintaining competitive performance.
+## LoRA-XS
 
+LoRA-XS (**Lo**w-**R**ank **A**daptation with e**X**tremely **S**mall number of parameters) is a novel approach leveraging Singular Value Decomposition (SVD) for parameter-efficient fine-tuning. LoRA-XS introduces a small `r x r` weight matrix between frozen LoRA matrices, which are constructed by SVD of the original weight matrix. Training only `r x r` weight matrices ensures independence from model dimensions, enabling more parameter-efficient fine-tuning, especially for larger models. LoRA-XS achieves a remarkable reduction of trainable parameters by over 100x in 7B models compared to LoRA. Our benchmarking across various scales, including GLUE, GSM8k, and MATH benchmarks, shows that our approach outperforms LoRA and recent state-of-the-art approaches like VeRA in terms of parameter efficiency while maintaining competitive performance.
 
 <p align="center">
-  <img src="./assets/LoRA_versus_LoRAxs.png" alt=“LoRA-XS” width=90%>
+  <img src="https://raw.githubusercontent.com/MohammadrezaBanaei/LoRA-XS/refs/heads/main/assets/LoRA_versus_LoRAxs.png" alt=“LoRA-XS” width=90%>
   <br> Visual comparison of LoRA and <b>LoRA-XS</b> techniques. The key distinction of LoRA-XS lies in its use of a small<br> trainable matrix <b>R</b> between frozen low-rank matrices A and B derived from truncated SVD of pretrained weights.
 </p>
   
+The goal of this project is to combine LoRA-XS's parameter efficiency with AdaLoRA's dynamic adaptability, optimizing parameter usage and improving fine-tuning performance, especially in resource-constrained environments.
+
+## Adaptive Rank Allocation
+
+The approach employs a trainable parameter `w` for each weight matrix to determine its rank. For `N` trainable matrices `A1, A2, ..., An`, corresponding rank allocation weights `w1, w2, ..., wn` are assigned.  
+
+Initially, the rank values are continuous, and masks applied to the weight matrices are non-discrete. Through training, the rank allocation stabilizes, and the masks transition to discrete values, enabling adaptive rank allocation.
+
 
 ## Requirements
 We recommend running the scripts inside a conda environment.
@@ -59,6 +68,17 @@ model = model.merge_and_unload()
 
 
 ```
+## Adaptive Rank Allocation Experiments
+To reproduce results for CoLA, run the following script:
+### Static memory
+```bash
+  python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_learning_rate 0.002 --epoch 50 --rank_min 5 --rank_average 20
+```
+### Dynamically decreasing memory
+```bash
+  python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_learning_rate 0.001 --epoch 50 --rank_min 5 --rank_average 20 --rank_start 40 &
+```
+
 ## GLUE Experiments
 **Note**: Feel free to limit the grid search in the following scripts if you want to train the model with a specific hyperparameter.
 ### Training from scratch
@@ -127,4 +147,8 @@ If you use this code for your research, please cite the following paper:
   year={2024}
 }
 ```
+
+## References  
+- [**LoRA-XS**: Low-Rank Adaptation with Extremely Small Number of Parameters](https://arxiv.org/abs/2405.17604)  
+- [**AdaLoRA**: Adaptive Low-Rank Fine-Tuning for Efficient Model Training](https://arxiv.org/pdf/2303.10512)  
 

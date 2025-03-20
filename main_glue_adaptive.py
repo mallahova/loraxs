@@ -817,6 +817,7 @@ def main():
             self.memory_end=memory_end
             self.memory=self.memory_size
             # memory update: epochs 0-4: static memory_size, epochs 5-24: updates from memory_size to memory_end, epochs 25-49: static memory_end
+            raise NotImplementedError # memory update not implemented correctly
             self.memory_update=(memory_end-memory_size)/(max_train_steps-30*num_update_steps_per_epoch)
             self.alpha=alpha_min
             self.alpha_max=alpha_max    
