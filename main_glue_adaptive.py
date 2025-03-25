@@ -818,7 +818,7 @@ def main():
             self.memory=self.memory_size
             # memory update: epochs 0-4: static memory_size, epochs 5-24: updates from memory_size to memory_end, epochs 25-49: static memory_end
             # raise NotImplementedError # memory update not implemented correctly
-            self.memory_update=(memory_end-memory_size)/(max_train_steps-30*num_update_steps_per_epoch)
+            self.memory_update=(memory_end-memory_size)/(20 * num_update_steps_per_epoch)
             self.alpha=alpha_min
             self.alpha_max=alpha_max    
             self.alpha_update=(alpha_max-alpha_min)/max_train_steps
@@ -844,7 +844,7 @@ def main():
             loss = super().training_step(model, inputs)
             self.log_rank_allocation()
 
-            if(current_epoch>=5 and current_epoch <25):
+            if(current_epoch>=20 and current_epoch <40):
                 self.update_memory()
             self.update_alpha()
             return loss

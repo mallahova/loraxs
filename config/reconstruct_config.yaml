@@ -5,7 +5,7 @@ replacement_module_random_init: False
 r_squared: True
 rank_masking: True
 adaptive_rank_allocation: True
-rank_allocation_weights_init: "quadratic"
+rank_allocation_weights_init: "random"
 svd:
   n_iter: 10
   random_state: 42
