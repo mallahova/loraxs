@@ -12,5 +12,4 @@ wandb
 slurm-*.out
 results_*
 
-scripts/custom_scripts/slurm
 tasks/adaptive_rank_allocation/90_percent_memory_experiment
