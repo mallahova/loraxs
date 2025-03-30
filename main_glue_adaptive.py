@@ -265,24 +265,42 @@ class RankAllocaionArguments:
     """
     Arguments for adaptive rank allocation
     """
-
-    memory_size: int = field(
-        default=None,
-        metadata={"help": "The size of memory to allocate for the fine-tuning process."}
-    )
-
     rank_average: int= field(
         default=None,
-        metadata={"help": "The average rank that will determine memory_size."}
+        metadata={"help": "The average rank that will determine memory_start and memory_end as rank_average * rank_average * num_trainable_matrices."}
     )
     rank_min: int = field(
-        default=15,
-        metadata={"help": "The minimum rank to be used for LoRA-XS."}
+        default=None,
+        metadata={"help": "The minimum rank that can be assigned for a parameter matrix."}
     )
     rank_max: int = field(
-        default=25,
-        metadata={"help": "The maximum rank to be used for LoRA-XS."}
+        default=None,
+        metadata={"help": "The maximum rank that can be assigned for a parameter matrix.."}
     )
+
+    memory_start: int = field(
+        default=None,
+        metadata={"help": " The total number of parameters that can be allocated at the start of the training."}
+    )
+    memory_end: int = field(
+        default=None,
+        metadata={"help": "The total number of parameters that can be allocated at the end of the training."}
+    )
+
+    epochs_memory_start: int = field(
+        default=None,
+        metadata={"help": " Number of epochs to keep the initial memory static."}
+    )
+
+    epochs_memory_start_to_end: int = field(
+        default=None,
+        metadata={"help": "Number of epochs to linearly increase/decrease the memory from memory_start to memory_end."}
+    )
+    epochs_rank_discrete: int = field(
+        default=0,
+        metadata={"help": "Number of final epochs to keep the rank allocation discrete."}
+    )
+
     alpha_min: float = field(
         default=0.5,
         metadata={"help": "The minimum alpha value."}
@@ -295,15 +313,10 @@ class RankAllocaionArguments:
         default=0.,
         metadata={"help": "Tau value."}
     )
-    rank_allocation_learning_rate: float = field(
+    rank_allocation_lr: float = field(
         default=1e-2,
-        metadata={"help": "Tau value."}
+        metadata={"help": "Learning rate for rank allocation weights."}
     )
-    rank_start: int= field(
-        default=None,
-        metadata={"help": "The starting average rank that will determine initial memory_size."}
-    )
-
 
 def main():
     # See all possible arguments in src/transformers/training_args.py
@@ -778,7 +791,7 @@ def main():
                 "params": [
                     model.rank_allocation_weights
                 ],
-                "lr": rank_allocation_args.rank_allocation_learning_rate,
+                "lr": rank_allocation_args.rank_allocation_lr,
             },
         ]
     )
@@ -798,6 +811,13 @@ def main():
     )
 
     def get_rank_allocation(w,rank_min, memory_size):
+        """
+        Get the rank allocation for each trainable parameter matrix.
+        :param w: The rank allocation weights.
+        :param rank_min: The minimum rank that can be assigned for a parameter matrix.
+        :param memory_size: The total number of parameters that can be allocated.
+        :return: Tensor of shape (N,) where N is the number of parameter matrices and each element is the rank allocated to that parameter matrix.
+        """
         N=len(w)
         return torch.sqrt(rank_min**2+(memory_size-N*rank_min**2)*torch.softmax(w,dim=0))
 
@@ -806,22 +826,39 @@ def main():
         Custom Trainer class to apply random or fixed masking during training and evaluation.
         """
 
-        def __init__(self,memory_size,  rank_min=15, rank_max=25, memory_end=25, alpha_min=0.5, alpha_max=3, *args, **kwargs):
+        def __init__(self, rank_min=15, rank_max=25, memory_start=20, memory_end=25, alpha_min=0.5, alpha_max=3, epochs_memory_start=None, epochs_memory_start_to_end=None, epochs_rank_discrete=0, *args, **kwargs):
             """
-            :param eval_mask_sizes: List of mask sizes to use during evaluation.
+            :param rank_min: The minimum rank that can be assigned for a parameter matrix.
+            :param rank_max: The maximum rank that can be assigned for a parameter matrix. Each of the trainable parameters is initialized with rank_max*rank_max matrices.
+            :param memory_start: The total number of parameters that can be allocated at the start of the training.
+            :param memory_end: The total number of parameters that can be allocated at the end of the training.
+            :param alpha_min: Minimum alpha value. Initializes alpha, a parameter that impacts discretization of the masks applied to the trainable parameters.
+            :param alpha_max: Maximum alpha value. Final alpha. 
+            :param epochs_memory_start: Number of epochs to keep the initial memory static.
+            :param epochs_memory_start_to_end: Number of epochs to linearly increase/decrease the memory from memory_start to memory_end. 
+            The number of epochs to keep memory_end static is calculated as total_epochs - epochs_memory_start - epochs_memory_start_to_end.
+            :param epochs_rank_discrete: Number of final epochs to keep the rank allocation discrete.
             """
             super().__init__(*args, **kwargs)
             self.rank_min = rank_min
             self.rank_max = rank_max
-            self.memory_size=memory_size
-            self.memory_end=memory_end
-            self.memory=self.memory_size
-            # memory update: epochs 0-4: static memory_size, epochs 5-24: updates from memory_size to memory_end, epochs 25-49: static memory_end
-            # raise NotImplementedError # memory update not implemented correctly
-            self.memory_update=(memory_end-memory_size)/(20 * num_update_steps_per_epoch)
+
+            self.memory=memory_start
+            if memory_start != memory_end:
+                self.memory_update=(memory_end-memory_start)/(epochs_memory_start_to_end * num_update_steps_per_epoch)
+                self.epochs_memory_start=epochs_memory_start
+                self.epochs_memory_start_to_end=epochs_memory_start_to_end
+            else:
+                self.memory_update=None
+                self.epochs_memory_start=0
+                self.epochs_memory_start_to_end=0
+
             self.alpha=alpha_min
             self.alpha_max=alpha_max    
             self.alpha_update=(alpha_max-alpha_min)/max_train_steps
+            
+            self.epochs_rank_discrete=epochs_rank_discrete
+
             self.rank_allocation = None
 
         def update_alpha(self):
@@ -831,21 +868,25 @@ def main():
             self.memory+=self.memory_update
             
         def training_step(self, model, inputs):
+            # check if the current epoch should use discrete rank allocation
             current_epoch = int(self.state.epoch or 0)
             total_epochs = int(self.args.num_train_epochs)
-            is_last_epoch = current_epoch + 1 == total_epochs
+            is_rank_discrete_epoch = current_epoch + self.epochs_rank_discrete == total_epochs
 
             self.rank_allocation=get_rank_allocation(model.rank_allocation_weights,self.rank_min, self.memory)
-            if not is_last_epoch:
+            if not is_rank_discrete_epoch:
                 set_rank_mask(model, self.rank_allocation, self.alpha)
             else:
-                self.rank_allocation=torch.round(self.rank_allocation).int()
+                self.rank_allocation=torch.round(self.rank_allocation).int() #discretize the rank allocation
                 set_rank_mask(model, self.rank_allocation, None)
             loss = super().training_step(model, inputs)
             self.log_rank_allocation()
 
-            if(current_epoch>=20 and current_epoch <40):
-                self.update_memory()
+            # check if the memory should be updated
+            if(self.memory_update is not None):
+                if(current_epoch>=self.epochs_memory_start and current_epoch <self.epochs_memory_start+self.epochs_memory_start_to_end):
+                    self.update_memory()
+
             self.update_alpha()
             return loss
         
@@ -856,6 +897,7 @@ def main():
             Evaluate the model with masks of varying sizes.
             """
             self.rank_allocation=get_rank_allocation(model.rank_allocation_weights, self.rank_min, self.memory)
+            #set discrete rank allocation
             set_rank_mask(model, self.rank_allocation, None)
             return super().evaluate(
                 eval_dataset=eval_dataset,
@@ -871,22 +913,20 @@ def main():
                 **{f"rank_allocation_{i}": rank for i, rank in enumerate(self.rank_allocation.tolist())}
             })
 
-    if rank_allocation_args.rank_average is None:
-        rank_allocation_args.rank_average=(rank_allocation_args.rank_max+rank_allocation_args.rank_min)//2
 
-    if rank_allocation_args.rank_start is None:
-        rank_allocation_args.rank_start=rank_allocation_args.rank_average
-
-    if rank_allocation_args.memory_size is None:
-        rank_allocation_args.memory_size=model.rank_allocation_weights.shape[0]*((rank_allocation_args.rank_start)**2) # enough memory for each weight matrix to havethe average rank
-    memory_end=rank_allocation_args.rank_average**2*model.rank_allocation_weights.shape[0]
+    if rank_allocation_args.memory_start is None:
+        rank_allocation_args.memory_start=rank_allocation_args.memory_end=model.rank_allocation_weights.shape[0]*((rank_allocation_args.rank_average)**2) # enough memory for each weight matrix to have the average rank
+    
     trainer = RankMaskingTrainer(
-        memory_size=rank_allocation_args.memory_size,
         rank_min=rank_allocation_args.rank_min,
         rank_max=rank_allocation_args.rank_max,
-        memory_end=memory_end,
+        memory_start=rank_allocation_args.memory_start,
+        memory_end=rank_allocation_args.memory_end,
         alpha_min=rank_allocation_args.alpha_min,
         alpha_max=rank_allocation_args.alpha_max,
+        epochs_memory_start=rank_allocation_args.epochs_memory_start,
+        epochs_memory_start_to_end=rank_allocation_args.epochs_memory_start_to_end,
+        epochs_rank_discrete=rank_allocation_args.epochs_rank_discrete,
         model=model,
         args=training_args,
         train_dataset=train_dataset if training_args.do_train else None,

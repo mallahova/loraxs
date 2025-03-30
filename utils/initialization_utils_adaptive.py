@@ -98,6 +98,7 @@ class WeightMaskingLinear(torch.nn.Linear):
 def set_rank_mask(model, rank_allocation: torch.Tensor, alpha):
     """
     Set the mask for all WeightMaskingLinear layers in the model.
+    Setting alpha to None discretizes the rank allocation.
     """
     ind=0
     for _, module in model.named_modules():

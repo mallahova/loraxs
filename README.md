@@ -69,7 +69,49 @@ model = model.merge_and_unload()
 
 ```
 ## Adaptive Rank Allocation Experiments
-To reproduce results for CoLA, run the following script:
+
+The main implementation script `main_glue_adaptive.py` extends the implementation of `main_glue.py` by introducing adaptive rank allocation through the `RankAllocationArguments` class. This enhancement enables dynamic allocation of ranks to parameter matrices, optimizing memory usage and training efficiency.
+
+## RankAllocationArguments
+
+The `RankAllocationArguments` dataclass defines several arguments for adaptive rank allocation:
+
+- **rank_average** (*int*): Determines `memory_start` and `memory_end` as `rank_average * rank_average * num_trainable_matrices`.
+- **rank_min** (*int*): Minimum rank that can be assigned to a parameter matrix.
+- **rank_max** (*int*): Maximum rank that can be assigned to a parameter matrix.
+- **memory_start** (*int*): Total number of parameters allocated at the start of training.
+- **memory_end** (*int*): Total number of parameters allocated at the end of training.
+- **epochs_memory_start** (*int*): Number of epochs to keep the initial memory static.
+- **epochs_memory_start_to_end** (*int*): Number of epochs to linearly adjust memory from `memory_start` to `memory_end`.
+- **epochs_rank_discrete** (*int*): Number of final epochs to keep rank allocation discrete.
+- **alpha_min** (*float*): Minimum alpha value.
+- **alpha_max** (*float*): Maximum alpha value.
+- **tau** (*float*): Tau value.
+- **rank_allocation_lr** (*float*): Learning rate for rank allocation weights.
+
+
+## Example usage
+
+The script for running experiments on CoLA, SST-2 and QNLI tasks with predefined arguments: `scripts/run_glue_adaptive.py`.
+### Static memory
+```bash
+python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_lr 0.002 --epoch 50 --rank_min 5 --rank_max 25 --rank_average 20 --seed 42
+```
+
+### Dynamic memory
+The initial memory has average rank of 20, then it's 25.
+Number of trainable matrices for CoLA task: 96.
+```python
+memory_start=20*20*96
+memory_end=25*25*96
+```
+```bash
+python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_lr 0.002 --epoch 50 --rank_min 5 --rank_max 30 --memory_start 38400 --memory_end 60000 --epochs_memory_start 3 --epochs_memory_start_to_end 5 --seed 42
+```
+
+
+
+<!-- To reproduce results for CoLA, run the following script:
 ### Static memory
 ```bash
   python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_learning_rate 0.002 --epoch 50 --rank_min 5 --rank_average 20
@@ -77,7 +119,7 @@ To reproduce results for CoLA, run the following script:
 ### Dynamically decreasing memory
 ```bash
   python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_learning_rate 0.001 --epoch 50 --rank_min 5 --rank_average 20 --rank_start 40 &
-```
+``` -->
 
 ## GLUE Experiments
 **Note**: Feel free to limit the grid search in the following scripts if you want to train the model with a specific hyperparameter.
