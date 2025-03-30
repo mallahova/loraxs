@@ -71,7 +71,7 @@ model = model.merge_and_unload()
 ## Adaptive Rank Allocation Experiments
 
 The main implementation script `main_glue_adaptive.py` extends the implementation of `main_glue.py` by introducing adaptive rank allocation through the `RankAllocationArguments` class. This enhancement enables dynamic allocation of ranks to parameter matrices, optimizing memory usage and training efficiency.
-
+To change the initialization for rank allocation weights (the default is randn), set the rank_allocation_weights_init: initialization_type in `config/reconstruct_config.yaml`.
 ## RankAllocationArguments
 
 The `RankAllocationArguments` dataclass defines several arguments for adaptive rank allocation:
@@ -109,17 +109,8 @@ memory_end=25*25*96
 python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_lr 0.002 --epoch 50 --rank_min 5 --rank_max 30 --memory_start 38400 --memory_end 60000 --epochs_memory_start 3 --epochs_memory_start_to_end 5 --seed 42
 ```
 
-
-
-<!-- To reproduce results for CoLA, run the following script:
-### Static memory
-```bash
-  python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_learning_rate 0.002 --epoch 50 --rank_min 5 --rank_average 20
-```
-### Dynamically decreasing memory
-```bash
-  python scripts/run_glue_adaptive.py --target_task cola --wandb_disabled False --rank_allocation_learning_rate 0.001 --epoch 50 --rank_min 5 --rank_average 20 --rank_start 40 &
-``` -->
+## Current Experiments & Tasks
+The code for the specific task, including scripts and report files, can be found in the `tasks/adaptive_rank_allocation` directory.
 
 ## GLUE Experiments
 **Note**: Feel free to limit the grid search in the following scripts if you want to train the model with a specific hyperparameter.
