@@ -1,6 +1,16 @@
+<!-- ### Uniform initialization (r=20 for every parameter matrix), grid search over learning rates and rank ranges, only 1 run for each learning rate -->
+
+# Bigger to smaller memory on CoLA Report
+
+# Randn initialization
 Initial rank is 40, epochs 0-14 rank 40, epochs 15-24 rank 40->20, epoch 25-50 rank 20.
 rank_allocation_weights initialized to random, same scheduling, discrete rank on the last epoch, rank_min is 5, rank_max is 40
 
+
+
+    
+![png](report_files/report_12_0.png)
+    
 
 
 
@@ -16,12 +26,18 @@ rank_allocation_weights initialized to random, same scheduling, discrete rank on
 
 
     
-![png](report_files/report_9_2.png)
+![png](report_files/report_13_2.png)
     
 
 
 Initial rank is 40, epochs 0-19 rank 40, epochs 20-39 rank 40->20, epoch 40-49 rank 20. 
 rank_allocation_weights initialized to random, same scheduling, discrete rank on the last epoch, rank_min is 5, rank_max is 50
+
+
+    
+![png](report_files/report_15_0.png)
+    
+
 
 
 | Task   |   Rank Min |   Rank Max |   Alpha Min |   Alpha Max |    LR |   Rank Avg | Median ± Std   |
@@ -36,13 +52,19 @@ rank_allocation_weights initialized to random, same scheduling, discrete rank on
 
 
     
-![png](report_files/report_11_2.png)
+![png](report_files/report_16_2.png)
     
 
 
-## Quadratic initialization
+# Quadratic initialization
 Initial rank is 40, epochs 0-19 rank 40, epochs 20-39 rank 40->20, epoch 40-49 rank 20. 
 rank_allocation_weights initialized to quadratic, same scheduling, discrete rank on the last epoch, rank_min is 5, rank_max is 50
+
+
+    
+![png](report_files/report_18_0.png)
+    
+
 
 
 | Task   |   Rank Min |   Rank Max |   Alpha Min |   Alpha Max |    LR |   Rank Avg | Median ± Std   |
@@ -57,6 +79,14 @@ rank_allocation_weights initialized to quadratic, same scheduling, discrete rank
 
 
     
-![png](report_files/report_13_2.png)
+![png](report_files/report_19_2.png)
+    
+
+
+### Learning rate for all of the experiments
+
+
+    
+![png](report_files/report_21_0.png)
     
 
