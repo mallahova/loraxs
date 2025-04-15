@@ -14,3 +14,4 @@ for rank_allocation_learning_rate in 0.02 0.05 0.1; do
 done
 
 wait
+
