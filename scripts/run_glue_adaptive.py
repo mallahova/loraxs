@@ -14,8 +14,6 @@ def glue_main(args):
             args.rank_max= args.rank_start
         else:
             args.rank_max=args.rank_average
-    args.rank_max=args.rank_max if args.rank_max else args.rank_average
-    args.rank_average=args.rank_average if args.rank_average else (int(args.rank_max)+int(args.rank_min))//2
     for lr in learning_rates:
         for cls_lr in cls_learning_rates:
             for seed in seeds:
