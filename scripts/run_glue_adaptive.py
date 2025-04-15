@@ -28,6 +28,8 @@ def glue_main(args):
                     "--per_device_train_batch_size", str(args.batch_size),
                     "--num_train_epochs", str(args.epoch),
                     "--output_dir", results_dir,
+                    "--learning_rate", lr,
+                    "--cls_learning_rate", cls_lr,
                     "--do_train", "--do_eval",
                     "--max_seq_length", "128",
                     "--evaluation_strategy", "epoch",
@@ -52,7 +54,7 @@ def glue_main(args):
                 add_arg("alpha_min", args.alpha_min)
                 add_arg("alpha_max", args.alpha_max)
                 add_arg("rank_allocation_lr", args.rank_allocation_lr)
-
+                add_arg("lr_scheduler", args.lr_scheduler)
                 os.system(" ".join(run_str))
                 print(run_str)
 
@@ -81,7 +83,11 @@ if __name__ == "__main__":
     parser.add_argument("--alpha_max", required=False, default=3)
 
     parser.add_argument("--rank_allocation_lr", required=False, default=1e-2)
+    parser.add_argument("--lr_scheduler", required=False, default="linear_schedule_with_warmup",  choices= ["linear_schedule_with_warmup", "constant_schedule"])
+
+
     parser.add_argument("--seed", required=False, default=None)
+
 
     args = parser.parse_args()
     glue_main(args)

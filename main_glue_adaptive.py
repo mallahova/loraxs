@@ -34,6 +34,7 @@ from transformers import (
     default_data_collator,
     set_seed,
     get_linear_schedule_with_warmup,
+    get_constant_schedule
 )
 from peft import (
     get_peft_config,
@@ -258,6 +259,13 @@ class ModelArguments:
     )
     cls_learning_rate: float = field(
         default=2e-4, metadata={"help": "LR for classifier."}
+    )
+    lr_scheduler: str = field(
+        default="linear_schedule_with_warmup",
+        metadata={
+        "help": "LR scheduler type",
+        "choices": ["linear_schedule_with_warmup", "constant_schedule"]
+    },
     )
 
 @dataclass
@@ -804,11 +812,20 @@ def main():
         )
     )
     max_train_steps = training_args.num_train_epochs * num_update_steps_per_epoch
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer,
-        num_warmup_steps=int(0.06 * max_train_steps),
-        num_training_steps=max_train_steps,
-    )
+    if model_args.lr_scheduler == "linear_schedule_with_warmup":
+        scheduler = get_linear_schedule_with_warmup(
+            optimizer,
+            num_warmup_steps=int(0.06 * max_train_steps),
+            num_training_steps=max_train_steps,
+        )
+    elif model_args.lr_scheduler == "constant_schedule":
+        scheduler = get_constant_schedule(
+            optimizer
+        )
+    else:
+        raise ValueError(
+            f"Unknown scheduler {model_args.lr_scheduler}."
+        )
 
     def get_rank_allocation(w,rank_min, memory_size):
         """
