@@ -18,6 +18,7 @@ def get_results(project:str, entity:str, starts_with="", epoch_start=0,date_befo
     runs = api.runs(f"{entity}/{project}")
     run_max_metrics = []
     for run in runs:
+        if run.state != "finished": continue
         if run.name.startswith(starts_with):
             # Skip runs created before the specified date
             created_at = datetime.strptime(run.created_at.rstrip('Z'), "%Y-%m-%dT%H:%M:%S")
@@ -332,6 +333,7 @@ def display_project_stats(project:str, entity:str, starts_with="", epoch_start=0
    # values, component_types=plot_rank_distribution(project=project, entity=entity, run_name=best_run['run_name'])
    # plot_rank_allocation_by_component_type(values, component_types)
    # # print_results(run_max_metrics)
+   return run_max_metrics
 
 
 def fetch_and_plot_wandb_runs(entity, project, metric="loss", x_axis="step", interactive=False, num_runs=5, date_before=None, date_after=None):
@@ -392,3 +394,15 @@ def fetch_and_plot_wandb_runs(entity, project, metric="loss", x_axis="step", int
         plt.legend()
         plt.grid()
         plt.show()
+
+
+
+def main():
+    project = "adalora_alpha"
+    entity = "mallahova"
+    starts_with="results_cola_5_30_0.1_5"
+    # display_project_stats(project=project, entity=entity, )
+    run_max_metrics=get_results(project=project, entity=entity, starts_with=starts_with)
+
+if __name__=='__main__':
+    main()

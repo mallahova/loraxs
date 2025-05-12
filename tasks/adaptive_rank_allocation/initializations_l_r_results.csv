@@ -1,0 +1,19 @@
+Project,Task,Rank Min,Rank Max,Alpha Min,Alpha Max,LR,Rank Avg,Median ± Std
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.02,20.0,67.70 ± 1.07
+adalora_alpha,cola,5.0,30.0,0.01,10.0,0.002,20.0,67.60 ± 1.10
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.002,20.0,67.29 ± 0.61
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.01,20.0,67.11 ± 1.03
+adalora_alpha,cola,5.0,30.0,0.01,10.0,0.01,20.0,66.94 ± 0.96
+adalora_alpha,cola,5.0,30.0,0.01,10.0,0.02,20.0,66.29 ± 1.80
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.02,20.0,67.70 ± 1.07
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.002,20.0,67.29 ± 0.61
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.01,20.0,67.11 ± 1.03
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.02,20.0,67.70 ± 1.07
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.002,20.0,67.29 ± 0.61
+adalora_alpha,cola,5.0,30.0,0.1,5.0,0.01,20.0,67.11 ± 1.03
+adalora_alpha,cola,5.0,30.0,0.01,10.0,0.002,20.0,67.60 ± 1.10
+adalora_alpha,cola,5.0,30.0,0.01,10.0,0.01,20.0,66.94 ± 0.96
+adalora_alpha,cola,5.0,30.0,0.01,10.0,0.02,20.0,66.29 ± 1.80
+adalora_constant_scheduler,cola,5.0,30.0,0.5,3.0,0.01,20.0,68.19 ± 1.03
+adalora_constant_scheduler,cola,5.0,30.0,0.5,3.0,0.02,20.0,67.39 ± 1.14
+adalora_constant_scheduler,cola,5.0,30.0,0.5,3.0,0.002,20.0,67.07 ± 1.13
