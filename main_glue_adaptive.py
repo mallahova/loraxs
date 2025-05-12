@@ -317,6 +317,13 @@ class RankAllocaionArguments:
         default=3.0,
         metadata={"help": "The maximum alpha value."}
     )
+    alpha_scheduler: str = field(
+        default="linear",
+        metadata={
+            "help": "The type of update for alpha ('linear' or 'exponential').",
+            "choices": ["linear", "exponential"],
+        },
+    )
     tau: float = field(
         default=0.,
         metadata={"help": "Tau value."}
@@ -837,6 +844,54 @@ def main():
         """
         N=len(w)
         return torch.sqrt(rank_min**2+(memory_size-N*rank_min**2)*torch.softmax(w,dim=0))
+        
+    class AlphaScheduler:
+        def step(self, alpha: float) -> float:
+            raise NotImplementedError
+
+    class LinearAlphaScheduler(AlphaScheduler):
+        def __init__(self, alpha_min, alpha_max, max_steps):
+            self.increment = (alpha_max - alpha_min) / max_steps if max_steps else 0
+
+        def step(self, alpha):
+            return alpha + self.increment
+
+    class ExponentialAlphaScheduler(AlphaScheduler):
+        def __init__(self, alpha_min, alpha_max, max_steps):
+            if alpha_min <= 0:
+                raise ValueError("alpha_min must be positive for exponential update type.")
+            self.factor = (alpha_max / alpha_min) ** (1 / max_steps) if max_steps else 1.0
+
+        def step(self, alpha):
+            return alpha * self.factor
+        
+    # class CosineAlphaScheduler(AlphaScheduler):
+    #     def __init__(self, alpha_min, alpha_max, max_steps):
+    #         self.alpha_min = alpha_min
+    #         self.alpha_max = alpha_max
+    #         self.max_steps = max_steps
+    #         self.current_step = 0
+
+    #     def step(self, alpha):
+    #         import math
+    #         self.current_step += 1
+    #         cosine_decay = 0.5 * (1 + math.cos(math.pi * self.current_step / self.max_steps))
+    #         return self.alpha_min + (self.alpha_max - self.alpha_min) * (1 - cosine_decay)
+
+    def get_alpha_scheduler(scheduler_type: str, alpha_min: float, alpha_max: float, max_steps: int) -> AlphaScheduler:
+        scheduler_type = scheduler_type.lower()
+        schedulers = {
+            "linear": LinearAlphaScheduler,
+            "exponential": ExponentialAlphaScheduler,
+            # "cosine": CosineAlphaScheduler,
+            }
+
+        if scheduler_type not in schedulers:
+            raise ValueError(f"Unknown alpha_update_type: {scheduler_type}. Available types: {list(schedulers.keys())}")
+
+        return schedulers[scheduler_type](alpha_min, alpha_max, max_steps)
+
+
 
     class RankMaskingTrainer(Trainer):
         """
@@ -872,14 +927,10 @@ def main():
 
             self.alpha=alpha_min
             self.alpha_max=alpha_max    
-            self.alpha_update=(alpha_max-alpha_min)/max_train_steps
-            
+            self.alpha_scheduler=get_alpha_scheduler(rank_allocation_args.alpha_scheduler, alpha_min, alpha_max, max_train_steps)
             self.epochs_rank_discrete=epochs_rank_discrete
 
             self.rank_allocation = None
-
-        def update_alpha(self):
-            self.alpha+=self.alpha_update
 
         def update_memory(self):
             self.memory+=self.memory_update
@@ -904,7 +955,7 @@ def main():
                 if(current_epoch>=self.epochs_memory_start and current_epoch <self.epochs_memory_start+self.epochs_memory_start_to_end):
                     self.update_memory()
 
-            self.update_alpha()
+            self.alpha=self.alpha_scheduler.step(self.alpha)
             return loss
         
         def evaluate(

@@ -53,6 +53,7 @@ def glue_main(args):
                 add_arg("epochs_rank_discrete", args.epochs_rank_discrete)
                 add_arg("alpha_min", args.alpha_min)
                 add_arg("alpha_max", args.alpha_max)
+                add_arg("alpha_scheduler", args.alpha_scheduler)
                 add_arg("rank_allocation_lr", args.rank_allocation_lr)
                 add_arg("lr_scheduler", args.lr_scheduler)
                 os.system(" ".join(run_str))
@@ -81,6 +82,7 @@ if __name__ == "__main__":
     
     parser.add_argument("--alpha_min", required=False, default=0.5)
     parser.add_argument("--alpha_max", required=False, default=3)
+    parser.add_argument("--alpha_scheduler", required=False, default="linear", choices=["linear", "exponential", "cosine"])
 
     parser.add_argument("--rank_allocation_lr", required=False, default=1e-2)
     parser.add_argument("--lr_scheduler", required=False, default="linear_schedule_with_warmup",  choices= ["linear_schedule_with_warmup", "constant_schedule"])
