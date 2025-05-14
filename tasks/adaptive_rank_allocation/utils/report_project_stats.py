@@ -173,13 +173,15 @@ def plot_results(run_max_metrics: str):
     plt.figure(figsize=(20, 6))
     bar_positions = np.arange(len(run_names))
     plt.bar(bar_positions, overall_max, color=colors, edgecolor='black')
-
+    baseline_median = 68.08
+    baseline_std = 1.21
     rank_25_median = 68.55
     rank_25_std = 0.81
 
     # Add baselines with shading for std
+    plt.axhline(baseline_median, color='red', linestyle='--', label='Baseline for r=20')
     plt.axhline(rank_25_median, color='black', linestyle='--', label='Baseline for r=25')
-
+    plt.fill_between(bar_positions, baseline_median - baseline_std, baseline_median + baseline_std, color='red', alpha=0.2, label='Baseline (r=20) ± std')
     plt.fill_between(bar_positions, rank_25_median - rank_25_std, rank_25_median + rank_25_std, color='black', alpha=0.1, label='Baseline (r=25) ± std')
 
     # Adding labels and legend
@@ -201,7 +203,7 @@ def plot_results(run_max_metrics: str):
 
 def plot_rank_distribution(project: str, entity: str, run_name: str):
     # Load layer names from CSV
-    layer_names_df = pd.read_csv('assets/layer_names.csv')
+    layer_names_df = pd.read_csv('utils/assets/layer_names.csv')
     
     # Parse component types and layer numbers from layer names
     component_types = []
@@ -398,11 +400,10 @@ def fetch_and_plot_wandb_runs(entity, project, metric="loss", x_axis="step", int
 
 
 def main():
-    project = "adalora_alpha"
+    project = "adalora_constant_scheduler"
     entity = "mallahova"
-    starts_with="results_cola_5_30_0.1_5"
-    # display_project_stats(project=project, entity=entity, )
-    run_max_metrics=get_results(project=project, entity=entity, starts_with=starts_with)
+    starts_with="results_cola_5_30_0.5_3"
+    results_05to3=display_project_stats(project=project, entity=entity, starts_with=starts_with, date_after=datetime(2025,5,11))
 
 if __name__=='__main__':
     main()
