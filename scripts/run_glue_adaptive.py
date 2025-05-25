@@ -33,7 +33,7 @@ def glue_main(args):
                     "--do_train", "--do_eval",
                     "--max_seq_length", "128",
                     "--evaluation_strategy", "epoch",
-                    "--logging_steps", "10",
+                    "--logging_steps", "20",
                     "--overwrite_output_dir",
                     "--save_steps", "0",
                 ]
