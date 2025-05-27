@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=adaptive_loraxs
 #SBATCH --partition=dgx
-#SBATCH --qos=quick
+#SBATCH --qos=normal
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=5
 
