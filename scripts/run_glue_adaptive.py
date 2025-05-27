@@ -12,48 +12,48 @@ def glue_main(args):
             args.rank_max= args.rank_start
         else:
             args.rank_max=args.rank_average
-        for seed in seeds:
-            results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{seed}_{args.rank_allocation_lr}_{args.rank_average}"
-            run_str = [
-                f'WANDB_DISABLED="{wandb_disabled}"',
-                "python", "main_glue_adaptive.py",
-                "--model_name_or_path", model_name,
-                "--lora_rank", str(args.rank_max),
-                "--task_name", task,
-                "--seed", str(seed),
-                "--per_device_train_batch_size", str(args.batch_size),
-                "--num_train_epochs", str(args.epoch),
-                "--output_dir", results_dir,
-                "--learning_rate", str(args.lr),
-                "--cls_learning_rate", str(args.cls_lr),
-                "--do_train", "--do_eval",
-                "--max_seq_length", "128",
-                "--evaluation_strategy", "epoch",
-                "--logging_steps", "20",
-                "--overwrite_output_dir",
-                "--save_steps", "0",
-            ]
+    for seed in seeds:
+        results_dir = f"results_{task}_{args.rank_min}_{args.rank_max}_{args.alpha_min}_{args.alpha_max}_{seed}_{args.rank_allocation_lr}_{args.rank_average}"
+        run_str = [
+            f'WANDB_DISABLED="{wandb_disabled}"',
+            "python", "main_glue_adaptive.py",
+            "--model_name_or_path", model_name,
+            "--lora_rank", str(args.rank_max),
+            "--task_name", task,
+            "--seed", str(seed),
+            "--per_device_train_batch_size", str(args.batch_size),
+            "--num_train_epochs", str(args.epoch),
+            "--output_dir", results_dir,
+            "--learning_rate", str(args.lr),
+            "--cls_learning_rate", str(args.cls_lr),
+            "--do_train", "--do_eval",
+            "--max_seq_length", "128",
+            "--evaluation_strategy", "epoch",
+            "--logging_steps", "20",
+            "--overwrite_output_dir",
+            "--save_steps", "0",
+        ]
 
-            # Helper function to add arguments conditionally
-            def add_arg(arg_name, arg_value):
-                if arg_value is not None:
-                    run_str.extend([f"--{arg_name}", str(arg_value)])
+        # Helper function to add arguments conditionally
+        def add_arg(arg_name, arg_value):
+            if arg_value is not None:
+                run_str.extend([f"--{arg_name}", str(arg_value)])
 
-            add_arg("rank_average", args.rank_average)
-            add_arg("rank_min", args.rank_min)
-            add_arg("rank_max", args.rank_max)
-            add_arg("memory_start", args.memory_start)
-            add_arg("memory_end", args.memory_end)
-            add_arg("epochs_memory_start", args.epochs_memory_start)
-            add_arg("epochs_memory_start_to_end", args.epochs_memory_start_to_end)
-            add_arg("epochs_rank_discrete", args.epochs_rank_discrete)
-            add_arg("alpha_min", args.alpha_min)
-            add_arg("alpha_max", args.alpha_max)
-            add_arg("alpha_scheduler", args.alpha_scheduler)
-            add_arg("rank_allocation_lr", args.rank_allocation_lr)
-            add_arg("lr_scheduler", args.lr_scheduler)
-            os.system(" ".join(run_str))
-            print(run_str)
+        add_arg("rank_average", args.rank_average)
+        add_arg("rank_min", args.rank_min)
+        add_arg("rank_max", args.rank_max)
+        add_arg("memory_start", args.memory_start)
+        add_arg("memory_end", args.memory_end)
+        add_arg("epochs_memory_start", args.epochs_memory_start)
+        add_arg("epochs_memory_start_to_end", args.epochs_memory_start_to_end)
+        add_arg("epochs_rank_discrete", args.epochs_rank_discrete)
+        add_arg("alpha_min", args.alpha_min)
+        add_arg("alpha_max", args.alpha_max)
+        add_arg("alpha_scheduler", args.alpha_scheduler)
+        add_arg("rank_allocation_lr", args.rank_allocation_lr)
+        add_arg("lr_scheduler", args.lr_scheduler)
+        os.system(" ".join(run_str))
+        print(run_str)
 
 
 if __name__ == "__main__":
