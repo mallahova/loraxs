@@ -29,7 +29,19 @@ def get_results(project:str, entity:str, starts_with="", epoch_start=0,date_befo
                 continue
             seed = run.config.get("seed", "N/A")
             run_history = run.history()
-            rank_metrics = "eval/matthews_correlation"
+            task_to_metrics={
+                "cola": "eval/matthews_correlation",
+                "sst2": "eval/accuracy",
+                "mrpc": "eval/accuracy",
+                "qqp": "eval/accuracy",
+                "rte": "eval/accuracy",
+                "stsb": "eval/spearman_correlation",
+                "mnli": "eval/accuracy",
+                "qnli": "eval/accuracy",
+                "wnli": "eval/accuracy"
+            }
+            task=run.name.split("_")[1]
+            rank_metrics = task_to_metrics[task]
 
             # Regex pattern to parse run name
             pattern = r"results_(?P<task>[a-zA-Z0-9]+)_(?P<rank_min>[\d.]+)_(?P<rank_max>[\d.]+)_(?P<alpha_min>[\d.]+)_(?P<alpha_max>[\d.]+)_(?P<seed>\d+)_(?P<lr>[\d.eE+-]+)_(?P<rank_avg>[\d.\w]+)"
@@ -400,9 +412,9 @@ def fetch_and_plot_wandb_runs(entity, project, metric="loss", x_axis="step", int
 
 
 def main():
-    project = "adalora_constant_scheduler"
+    project = "adalora_qnli"
     entity = "mallahova"
-    starts_with="results_cola_5_30_0.5_3"
+    starts_with="results_qnli"
     results_05to3=display_project_stats(project=project, entity=entity, starts_with=starts_with, date_after=datetime(2025,5,11))
 
 if __name__=='__main__':
