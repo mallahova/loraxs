@@ -175,6 +175,7 @@ class RankAllocaionArguments:
     """
     Arguments for adaptive rank allocation
     """
+
     rank_min: int = field(metadata={"help": "The minimum rank that can be assigned for a parameter matrix."})
     rank_max: int = field(metadata={"help": "The maximum rank that can be assigned for a parameter matrix.."})
 
