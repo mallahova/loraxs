@@ -3,7 +3,7 @@ ADAPTIVE=main_glue_adaptive.py utils/adaptive
 
 codestyle:
 	ruff check $(ADAPTIVE)
-	ruff format --diff || (echo "Formatting issues detected. See diff above." && exit 1)
+	ruff format --diff $(ADAPTIVE) || (echo "Formatting issues detected. See diff above." && exit 1)
 fmt:
 	ruff format $(ADAPTIVE)
 	ruff check --fix $(ADAPTIVE)
