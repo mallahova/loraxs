@@ -11,7 +11,9 @@ from tqdm import tqdm
 from .latent_utils import get_delta_weight, forward_latent
 from .svd_utils import get_linear_rec_svd
 
+import wandb
 import matplotlib.pyplot as plt
+
 
 class WeightMaskingLinear(torch.nn.Linear):
     """
@@ -20,28 +22,30 @@ class WeightMaskingLinear(torch.nn.Linear):
 
     def __init__(self, in_features, out_features, rank_min, rank_max, tau=0, bias=True):
         super().__init__(in_features, out_features, bias)
-        self.register_buffer("ranks", torch.arange(rank_min,rank_max+1))
-        self.rank_min=rank_min
-        self.rank_max=rank_max
-        self.tau=tau
-        self.s=None
-        self.alpha=None
+        self.register_buffer("ranks", torch.arange(rank_min, rank_max + 1))
+        self.rank_min = rank_min
+        self.rank_max = rank_max
+        self.tau = tau
+        self.s = None
+        self.alpha = None
+        self.index = None
 
-    # def visualize_matrix(self,matrix, title="Matrix Visualization"):
-    #     plt.figure(figsize=(6, 6))
-    #     # Ustawienie zakresu wartości vmin=0 (biały), vmax=max(matrix) (czarny)
-    #     plt.imshow(matrix, cmap="gray_r", interpolation="none", vmin=0, vmax=matrix.max())
-    #     plt.colorbar(label="Value")
+    def log_matrix_to_wandb(self, matrix):
+        fig = plt.figure(figsize=(6, 6))
+        plt.imshow(matrix, cmap="gray_r", interpolation="none", vmin=0, vmax=matrix.max())
+        plt.colorbar(label="Value")
 
-    #     # Ustawienia etykiet osi
-    #     num_rows, num_cols = matrix.shape
-    #     plt.xticks(ticks=range(num_cols), labels=range(num_cols))
-    #     plt.yticks(ticks=range(num_rows), labels=range(num_rows))
-        
-    #     plt.title(title)
-    #     plt.xlabel("Columns (Index)")
-    #     plt.ylabel("Rows (Index)")
-    #     plt.show()
+        num_rows, num_cols = matrix.shape
+        plt.xticks(ticks=range(num_cols), labels=range(num_cols))
+        plt.yticks(ticks=range(num_rows), labels=range(num_rows))
+
+        plt.xlabel("Columns")
+        plt.ylabel("Rows")
+        plt.title(f"Rank: {self.s:.2f}, alpha: {self.alpha:.2f}")
+
+        if wandb.run is not None:
+            wandb.log({f"mask_{self.index}": wandb.Image(fig)})
+        plt.close(fig)
 
 
     def _create_mask(self, p):
@@ -51,26 +55,23 @@ class WeightMaskingLinear(torch.nn.Linear):
             tensor[:i, :i] = 1
             mask+= p[i - self.rank_min] * tensor
         return mask
-    
+
     def _create_discrete_mask(self):
         mask=torch.zeros_like(self.weight)
         discrete_rank = int(torch.round(self.s).item())
         mask[:discrete_rank, :discrete_rank] = 1
         return mask
-    
+
     def _prob_dist(self, s,alpha):
         logits=-alpha*torch.log(1+(s-self.ranks)**2)
         gumbel_dist = torch.distributions.Gumbel(0,1)
         gumbel_vector = gumbel_dist.sample((self.rank_max+1-self.rank_min,)).to(self.weight.device)
         return torch.softmax(logits+self.tau*gumbel_vector,dim=0)
-    
-    # def set_mask(self, s, alpha):
-    #     p=self._prob_dist(s,alpha).to(self.weight.device)
-    #     self._create_mask(p)
-    
-    def set_mask(self, s, alpha):
+
+    def set_mask(self, s, alpha, index: int = 0):
         self.s=s
         self.alpha=alpha
+        self.index=index
 
 
     def forward(self, input):
@@ -81,15 +82,10 @@ class WeightMaskingLinear(torch.nn.Linear):
             if self.alpha is not None:
                 p=self._prob_dist(self.s,self.alpha).to(self.weight.device)
                 mask=self._create_mask(p)
+                self.log_matrix_to_wandb(mask.cpu().detach().numpy())
             else:
                 mask=self._create_discrete_mask()
             masked_weight = self.weight * mask
-            # self.visualize_matrix(mask.cpu().detach().numpy())
-            # self.visualize_matrix(masked_weight.cpu().detach().numpy())
-            # plt.figure(figsize=(6, 6))
-            # plt.plot(self.ranks.cpu().detach().numpy(), p.cpu().detach().numpy())
-            # plt.show()
-
         else:
             masked_weight = self.weight
         return torch.nn.functional.linear(input, masked_weight, self.bias)
@@ -105,7 +101,7 @@ def set_rank_mask(model, rank_allocation: torch.Tensor, alpha):
         if isinstance(module, WeightMaskingLinear):
             s=rank_allocation[ind]
             ind+=1
-            module.set_mask(s, alpha)
+            module.set_mask(s, alpha, ind)
 
 
 
@@ -275,7 +271,7 @@ def find_and_initialize(
             f"Target modules {lora_config.target_modules} not found in the base model. "
             f"Please check the target modules and try again."
         )
-    
+
     if adaptive_rank_allocation:
         if rank_allocation_weights_init == "uniform":
             param=torch.nn.Parameter(torch.zeros(target_modules_count))
