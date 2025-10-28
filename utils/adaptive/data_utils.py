@@ -1,19 +1,21 @@
 import logging
 import random
-from typing import Any, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 from datasets import Dataset, DatasetDict, IterableDataset, IterableDatasetDict, load_dataset
 from peft import PeftMixedModel, PeftModel
-from transformers import PreTrainedTokenizerBase
+from transformers import PreTrainedTokenizerBase, TrainingArguments
 
-from utils.adaptive.args import task_to_keys
+from utils.adaptive.args import DataTrainingArguments, ModelArguments, task_to_keys
 
 logger = logging.getLogger(__name__)
 
 
 def prepare_train_eval_datasets(
-    data_args, raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset], training_args
-) -> Tuple[Union[Dataset, Any], Union[Dataset, Any], Union[Dataset, Any]]:
+    data_args: DataTrainingArguments,
+    raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
+    training_args: TrainingArguments,
+) -> Tuple[Dataset, Dataset, Dataset]:
     train_dataset = prepare_train_dataset(data_args, raw_datasets, training_args)
 
     eval_dataset = prepare_eval_dataset(data_args, raw_datasets, training_args)
@@ -24,8 +26,10 @@ def prepare_train_eval_datasets(
 
 
 def prepare_predict_dataset(
-    data_args, raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset], training_args
-) -> Union[Dataset, Any]:
+    data_args: DataTrainingArguments,
+    raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
+    training_args: TrainingArguments,
+) -> Dataset:
     if training_args.do_predict or data_args.task_name is not None or data_args.test_file is not None:
         if "test" not in raw_datasets and "test_matched" not in raw_datasets:
             raise ValueError("--do_predict requires a test dataset")
@@ -37,8 +41,10 @@ def prepare_predict_dataset(
 
 
 def prepare_eval_dataset(
-    data_args, raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset], training_args
-) -> Union[Dataset, Any]:
+    data_args: DataTrainingArguments,
+    raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
+    training_args: TrainingArguments,
+) -> Dataset:
     if training_args.do_eval:
         if "validation" not in raw_datasets and "validation_matched" not in raw_datasets:
             raise ValueError("--do_eval requires a validation dataset")
@@ -53,13 +59,13 @@ def prepare_eval_dataset(
 
 
 def preprocess_datasets(
-    data_args,
+    data_args: DataTrainingArguments,
     model: Union[PeftModel, PeftMixedModel],
-    model_args,
+    model_args: ModelArguments,
     raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
-    tokenizer: Union[PreTrainedTokenizerBase, Any],
-    training_args,
-    label_to_id,
+    tokenizer: PreTrainedTokenizerBase,
+    training_args: TrainingArguments,
+    label_to_id: Optional[Dict[str, int]],
 ) -> Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset]:
     # Preprocessing the raw_datasets
     if data_args.task_name is not None:
@@ -91,7 +97,7 @@ def preprocess_datasets(
         tokenizer.pad_token = tokenizer.eos_token
         model.config.pad_token_id = model.config.eos_token_id
 
-    def preprocess_function(examples):
+    def preprocess_function(examples: Dict[str, List]) -> Dict[str, List]:
         # Tokenize the texts
         args = (
             (examples[sentence1_key],) if sentence2_key is None else (examples[sentence1_key], examples[sentence2_key])
@@ -113,7 +119,9 @@ def preprocess_datasets(
     return raw_datasets
 
 
-def get_label_info(data_args, raw_datasets) -> Tuple[int, bool, Any]:
+def get_label_info(
+    data_args: DataTrainingArguments, raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset]
+) -> Tuple[bool, Optional[List[str]], int]:
     # Labels
     if data_args.task_name is not None:
         is_regression = data_args.task_name == "stsb"
@@ -140,7 +148,7 @@ def get_label_info(data_args, raw_datasets) -> Tuple[int, bool, Any]:
 
 
 def load_datasets(
-    data_args, model_args, training_args
+    data_args: DataTrainingArguments, model_args: ModelArguments, training_args: TrainingArguments
 ) -> Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset]:
     if data_args.task_name is not None:
         # Downloading and loading a dataset from the hub.
@@ -202,8 +210,10 @@ def load_datasets(
 
 
 def prepare_train_dataset(
-    data_args, raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset], training_args
-) -> Union[Dataset, Any]:
+    data_args: DataTrainingArguments,
+    raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
+    training_args: TrainingArguments,
+) -> Dataset:
     if training_args.do_train:
         if "train" not in raw_datasets:
             raise ValueError("--do_train requires a train dataset")

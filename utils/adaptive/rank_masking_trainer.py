@@ -1,6 +1,8 @@
 import logging
+from typing import Any, Dict, List, Optional, Union
 
 import torch
+from torch import nn
 from transformers import (
     Trainer,
 )
@@ -18,21 +20,21 @@ class RankMaskingTrainer(Trainer):
 
     def __init__(
         self,
-        rank_allocation_args,
+        rank_allocation_args: Any,
         max_train_steps: int,
         num_update_steps_per_epoch: int,
-        rank_min=15,
-        rank_max=25,
-        memory_start=20,
-        memory_end=25,
-        alpha_min=0.5,
-        alpha_max=3,
-        epochs_memory_start=None,
-        epochs_memory_start_to_end=None,
-        epochs_rank_discrete=0,
-        *args,
-        **kwargs,
-    ):
+        rank_min: int = 15,
+        rank_max: int = 25,
+        memory_start: int = 20,
+        memory_end: int = 25,
+        alpha_min: float = 0.5,
+        alpha_max: float = 3,
+        epochs_memory_start: Optional[int] = None,
+        epochs_memory_start_to_end: Optional[int] = None,
+        epochs_rank_discrete: int = 0,
+        *args: Any,
+        **kwargs: Any,
+    ) -> None:
         """
         :param rank_min: The minimum rank that can be assigned for a parameter matrix.
         :param rank_max: The maximum rank that can be assigned for a parameter matrix.
@@ -48,32 +50,36 @@ class RankMaskingTrainer(Trainer):
         :param epochs_rank_discrete: Number of final epochs to keep the rank allocation discrete.
         """
         super().__init__(*args, **kwargs)
-        self.rank_min = rank_min
-        self.rank_max = rank_max
+        self.rank_min: int = rank_min
+        self.rank_max: int = rank_max
 
-        self.memory = memory_start
+        self.memory: float = memory_start
+        self.memory_update: Optional[float] = None
+        self.epochs_memory_start: int = 0
+        self.epochs_memory_start_to_end: int = 0
+
         if memory_start != memory_end:
+            assert epochs_memory_start is not None
+            assert epochs_memory_start_to_end is not None
+
             self.memory_update = (memory_end - memory_start) / (epochs_memory_start_to_end * num_update_steps_per_epoch)
             self.epochs_memory_start = epochs_memory_start
-            self.epochs_memory_start_to_end = epochs_memory_start_to_end
-        else:
-            self.memory_update = None
-            self.epochs_memory_start = 0
-            self.epochs_memory_start_to_end = 0
+            self.epochs_memory_start_to_endt = epochs_memory_start_to_end
 
-        self.alpha = alpha_min
-        self.alpha_max = alpha_max
-        self.alpha_scheduler = get_alpha_scheduler(
+        self.alpha: float = alpha_min
+        self.alpha_max: float = alpha_max
+        self.alpha_scheduler: Any = get_alpha_scheduler(
             rank_allocation_args.alpha_scheduler, alpha_min, alpha_max, max_train_steps
         )
-        self.epochs_rank_discrete = epochs_rank_discrete
+        self.epochs_rank_discrete: int = epochs_rank_discrete
 
-        self.rank_allocation = None
+        self.rank_allocation: Optional[torch.Tensor] = None
 
-    def update_memory(self):
+    def update_memory(self) -> None:
+        assert self.memory_update is not None
         self.memory += self.memory_update
 
-    def training_step(self, model, inputs):
+    def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]]) -> torch.Tensor:
         # check if the current epoch should use discrete rank allocation
         current_epoch = int(self.state.epoch or 0)
         total_epochs = int(self.args.num_train_epochs)
@@ -99,7 +105,12 @@ class RankMaskingTrainer(Trainer):
         self.alpha = self.alpha_scheduler.step(self.alpha)
         return loss
 
-    def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"):
+    def evaluate(
+        self,
+        eval_dataset: Optional[Any] = None,
+        ignore_keys: Optional[List[str]] = None,
+        metric_key_prefix: str = "eval",
+    ) -> Dict[str, float]:
         """
         Evaluate the model with masks of varying sizes.
         """
@@ -112,7 +123,7 @@ class RankMaskingTrainer(Trainer):
             metric_key_prefix=metric_key_prefix,
         )
 
-    def log_rank_allocation(self):
+    def log_rank_allocation(self) -> None:
         """Log custom metrics to WandB."""
         self.log(
             {
@@ -123,7 +134,7 @@ class RankMaskingTrainer(Trainer):
         )
 
     @classmethod
-    def _set_rank_mask(cls, model, rank_allocation: torch.Tensor, alpha):
+    def _set_rank_mask(cls, model: nn.Module, rank_allocation: torch.Tensor, alpha: Optional[float]) -> None:
         """
         Set the mask for all WeightMaskingLinear layers in the model.
         Setting alpha to None discretizes the rank allocation.
@@ -136,7 +147,7 @@ class RankMaskingTrainer(Trainer):
                 module.set_mask(s, alpha, ind)
 
     @classmethod
-    def _get_rank_allocation(cls, w, rank_min, memory_size):
+    def _get_rank_allocation(cls, w: torch.Tensor, rank_min: float, memory_size: float) -> torch.Tensor:
         """
         Get the rank allocation for each trainable parameter matrix.
         :param w: The rank allocation weights.

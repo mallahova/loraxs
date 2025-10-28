@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Callable, Dict, List, Optional, Union
 
 import numpy as np
 import transformers
@@ -8,22 +8,23 @@ from datasets import Dataset, DatasetDict, IterableDataset, IterableDatasetDict
 from peft import PeftMixedModel, PeftModel
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import LambdaLR
-from transformers import DataCollatorWithPadding, EvalPrediction, PreTrainedTokenizerBase
+from transformers import DataCollatorWithPadding, EvalPrediction, PreTrainedTokenizerBase, TrainingArguments
 
+from utils.adaptive.args import DataTrainingArguments, RankAllocaionArguments
 from utils.adaptive.rank_masking_trainer import RankMaskingTrainer
 
 logger = logging.getLogger(__name__)
 
 
 def run_prediction(
-    data_args,
-    is_regression: int,
-    label_list: bool,
-    predict_dataset: Union[Dataset, Any],
+    data_args: DataTrainingArguments,
+    is_regression: bool,
+    label_list: List[str],
+    predict_dataset: Dataset,
     raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
     trainer: RankMaskingTrainer,
-    training_args,
-):
+    training_args: TrainingArguments,
+) -> None:
     logger.info("*** Predict ***")
 
     # Loop to handle MNLI double evaluation (matched, mis-matched)
@@ -53,11 +54,11 @@ def run_prediction(
 
 
 def run_evaluation(
-    data_args,
-    eval_dataset: Union[Dataset, Any],
+    data_args: DataTrainingArguments,
+    eval_dataset: Dataset,
     raw_datasets: Union[DatasetDict, Dataset, IterableDatasetDict, IterableDataset],
     trainer: RankMaskingTrainer,
-):
+) -> None:
     # Loop to handle MNLI double evaluation (matched, mis-matched)
     tasks = [data_args.task_name]
     eval_datasets = [eval_dataset]
@@ -86,12 +87,12 @@ def run_evaluation(
 
 
 def run_training(
-    data_args,
+    data_args: DataTrainingArguments,
     last_checkpoint: Optional[str],
-    train_dataset: Union[Dataset, Any],
+    train_dataset: Dataset,
     trainer: RankMaskingTrainer,
-    training_args,
-):
+    training_args: TrainingArguments,
+) -> None:
     checkpoint = None
     if training_args.resume_from_checkpoint is not None:
         checkpoint = training_args.resume_from_checkpoint
@@ -110,20 +111,21 @@ def run_training(
 
 
 def create_trainer(
-    compute_metrics: Tuple[Callable[[EvalPrediction], Any], Any],
-    data_collator: Union[Callable[[List[Any], str], Dict[str, Any]], DataCollatorWithPadding, None],
-    eval_dataset: Union[Dataset, Any],
-    max_train_steps,
+    compute_metrics: Callable[[EvalPrediction], Dict[str, float]],
+    data_collator: Optional[DataCollatorWithPadding],
+    eval_dataset: Dataset,
+    max_train_steps: int,
     model: Union[PeftModel, PeftMixedModel],
-    num_update_steps_per_epoch,
+    num_update_steps_per_epoch: int,
     optimizer: AdamW,
-    rank_allocation_args,
+    rank_allocation_args: RankAllocaionArguments,
     scheduler: Optional[LambdaLR],
-    tokenizer: Union[PreTrainedTokenizerBase, Any],
-    train_dataset: Union[Dataset, Any],
-    training_args,
+    tokenizer: PreTrainedTokenizerBase,
+    train_dataset: Dataset,
+    training_args: TrainingArguments,
 ) -> RankMaskingTrainer:
     if rank_allocation_args.memory_start is None:
+        assert rank_allocation_args.rank_average is not None
         rank_allocation_args.memory_start = rank_allocation_args.memory_end = model.rank_allocation_weights.shape[0] * (
             (rank_allocation_args.rank_average) ** 2
         )  # enough memory for each weight matrix to have the average rank

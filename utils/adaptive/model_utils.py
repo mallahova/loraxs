@@ -1,10 +1,10 @@
 import json
 import logging
 import os
-from typing import Any, Dict, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 import torch
-from peft import LoraConfig, PeftMixedModel, PeftModel
+from peft import LoraConfig, PeftConfig, PeftMixedModel, PeftModel
 from torch.utils.tensorboard import SummaryWriter
 from transformers import (
     AutoConfig,
@@ -14,6 +14,8 @@ from transformers import (
     PreTrainedTokenizerBase,
 )
 
+from main_math_tuning import TrainingArguments
+from utils.adaptive.args import DataTrainingArguments, ModelArguments, RankAllocaionArguments
 from utils.adaptive.initialization_utils import find_and_initialize
 from utils.adaptive.log import log_trainable_parameters
 
@@ -21,15 +23,15 @@ logger = logging.getLogger(__name__)
 
 
 def initialize_model(
-    adapter_name: Dict[Any, Any],
+    adapter_name: str,
     model: Union[PeftModel, PeftMixedModel],
-    peft_config_dict: SummaryWriter,
-    rank_allocation_args,
-    reconstr_config: str,
-    reconstr_type,
-    tb_writer,
-    training_args,
-):
+    peft_config_dict: Dict[str, PeftConfig],
+    rank_allocation_args: RankAllocaionArguments,
+    reconstr_config: Dict[str, dict],
+    reconstr_type: str,
+    tb_writer: SummaryWriter,
+    training_args: TrainingArguments,
+) -> Union[PeftModel, PeftMixedModel]:
     # Save configs
     tb_writer.add_text("peft_config_dict", str(peft_config_dict), 0)
     tb_writer.add_text("reconstr_config", str(reconstr_config), 0)
@@ -57,8 +59,13 @@ def initialize_model(
 
 
 def configure_label_mappings(
-    config, data_args, is_regression: int, label_list: bool, model: Union[PeftModel, PeftMixedModel], num_labels
-):
+    config: PretrainedConfig,
+    data_args: DataTrainingArguments,
+    is_regression: bool,
+    label_list: List[str],
+    model: Union[PeftModel, PeftMixedModel],
+    num_labels: int,
+) -> Optional[Dict[int, int]]:
     # Some models have set the order of the labels to use, so let's make sure we do use it.
     label_to_id = None
     if (
@@ -89,7 +96,9 @@ def configure_label_mappings(
     return label_to_id
 
 
-def load_model_and_tokenizer(data_args, model_args, num_labels) -> Tuple[Any, Any, Union[PreTrainedTokenizerBase, Any]]:
+def load_model_and_tokenizer(
+    data_args: DataTrainingArguments, model_args: ModelArguments, num_labels: int
+) -> Tuple[PretrainedConfig, AutoModelForSequenceClassification, PreTrainedTokenizerBase]:
     config = AutoConfig.from_pretrained(
         (model_args.config_name if model_args.config_name else model_args.model_name_or_path),
         num_labels=num_labels,
@@ -117,7 +126,7 @@ def load_model_and_tokenizer(data_args, model_args, num_labels) -> Tuple[Any, An
     return config, model, tokenizer
 
 
-def setup_peft_config(model_args) -> LoraConfig:
+def setup_peft_config(model_args: ModelArguments) -> PeftConfig:
     return LoraConfig(
         task_type="SEQ_CLS",
         inference_mode=False,

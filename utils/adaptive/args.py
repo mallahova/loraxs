@@ -98,7 +98,7 @@ class DataTrainingArguments:
         metadata={"help": "A csv or a json file containing the test data."},
     )
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.task_name is not None:
             self.task_name = self.task_name.lower()
             if self.task_name not in task_to_keys.keys():
@@ -175,8 +175,10 @@ class RankAllocaionArguments:
     """
     Arguments for adaptive rank allocation
     """
+    rank_min: int = field(metadata={"help": "The minimum rank that can be assigned for a parameter matrix."})
+    rank_max: int = field(metadata={"help": "The maximum rank that can be assigned for a parameter matrix.."})
 
-    rank_average: int = field(
+    rank_average: Optional[int] = field(
         default=None,
         metadata={
             "help": (
@@ -185,27 +187,20 @@ class RankAllocaionArguments:
             )
         },
     )
-    rank_min: int = field(
-        default=None, metadata={"help": "The minimum rank that can be assigned for a parameter matrix."}
-    )
-    rank_max: int = field(
-        default=None, metadata={"help": "The maximum rank that can be assigned for a parameter matrix.."}
-    )
-
-    memory_start: int = field(
+    memory_start: Optional[int] = field(
         default=None,
         metadata={"help": " The total number of parameters that can be allocated at the start of the training."},
     )
-    memory_end: int = field(
+    memory_end: Optional[int] = field(
         default=None,
         metadata={"help": "The total number of parameters that can be allocated at the end of the training."},
     )
 
-    epochs_memory_start: int = field(
+    epochs_memory_start: Optional[int] = field(
         default=None, metadata={"help": " Number of epochs to keep the initial memory static."}
     )
 
-    epochs_memory_start_to_end: int = field(
+    epochs_memory_start_to_end: Optional[int] = field(
         default=None,
         metadata={"help": "Number of epochs to linearly increase/decrease the memory from memory_start to memory_end."},
     )

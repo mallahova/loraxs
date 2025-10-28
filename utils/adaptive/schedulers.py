@@ -4,20 +4,20 @@ class AlphaScheduler:
 
 
 class LinearAlphaScheduler(AlphaScheduler):
-    def __init__(self, alpha_min, alpha_max, max_steps):
+    def __init__(self, alpha_min: float, alpha_max: float, max_steps: int):
         self.increment = (alpha_max - alpha_min) / max_steps if max_steps else 0
 
-    def step(self, alpha):
+    def step(self, alpha: float) -> float:
         return alpha + self.increment
 
 
 class ExponentialAlphaScheduler(AlphaScheduler):
-    def __init__(self, alpha_min, alpha_max, max_steps):
+    def __init__(self, alpha_min: float, alpha_max: float, max_steps: int):
         if alpha_min <= 0:
             raise ValueError("alpha_min must be positive for exponential update type.")
         self.factor = (alpha_max / alpha_min) ** (1 / max_steps) if max_steps else 1.0
 
-    def step(self, alpha):
+    def step(self, alpha: float) -> float:
         return alpha * self.factor
 
 

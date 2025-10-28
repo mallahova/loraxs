@@ -15,7 +15,7 @@ from utils.adaptive.args import DataTrainingArguments, ModelArguments, RankAlloc
 logger = logging.getLogger(__name__)
 
 
-def check_last_checkpoint(training_args) -> Optional[str]:
+def check_last_checkpoint(training_args: TrainingArguments) -> Optional[str]:
     # Detecting last checkpoint.
     last_checkpoint = None
     if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
@@ -33,7 +33,7 @@ def check_last_checkpoint(training_args) -> Optional[str]:
     return last_checkpoint
 
 
-def parse_arguments() -> Tuple[Any, Any, Any, Any]:
+def parse_arguments() -> Tuple[DataTrainingArguments, ModelArguments, RankAllocaionArguments, TrainingArguments]:
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments, RankAllocaionArguments))
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
         # If we pass only one argument to the script and it's the path to a json file,
@@ -47,10 +47,13 @@ def parse_arguments() -> Tuple[Any, Any, Any, Any]:
 
 
 def setup_output_dirs(
-    data_args, model_args, peft_config: LoraConfig, training_args
-) -> Tuple[SummaryWriter, Dict[Any, Any], Any, str, Any]:
-    now = datetime.datetime.now()
-    now = now.strftime("%Y-%m-%dT%H:%M:%S") + ("-%02d" % (now.microsecond / 10000))
+    data_args: DataTrainingArguments,
+    model_args: ModelArguments,
+    peft_config: LoraConfig,
+    training_args: TrainingArguments,
+) -> Tuple[Dict[str, LoraConfig], str, str, Dict[str, Any], SummaryWriter]:
+    now_datetime = datetime.datetime.now()
+    now = now_datetime.strftime("%Y-%m-%dT%H:%M:%S") + ("-%02d" % (now_datetime.microsecond / 10000))
 
     adapter_name = "default"
     peft_config_dict = {}
@@ -72,7 +75,9 @@ def setup_output_dirs(
     return peft_config_dict, adapter_name, reconstr_type, reconstr_config, tb_writer
 
 
-def load_reconstruction_config(adapter_name: str, peft_config_dict: Dict[Any, Any]) -> Tuple[Any, Any]:
+def load_reconstruction_config(
+    adapter_name: str, peft_config_dict: Dict[str, LoraConfig]
+) -> Tuple[Dict[str, Any], str]:
     with open("config/reconstruct_config.yaml", "r") as stream:
         reconstr_config = yaml.load(stream, Loader=yaml.FullLoader)
     reconstr_type = reconstr_config["reconstruction_type"]

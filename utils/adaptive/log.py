@@ -3,11 +3,14 @@ import sys
 
 import datasets
 import transformers
+from torch import nn
+from torch.utils.tensorboard import SummaryWriter
+from transformers import TrainingArguments
 
 logger = logging.getLogger(__name__)
 
 
-def log_trainable_parameters(model, tb_writer):
+def log_trainable_parameters(model: nn.Module, tb_writer: SummaryWriter) -> None:
     """
     Prints the number of trainable parameters in the model.
     """
@@ -37,7 +40,7 @@ def log_trainable_parameters(model, tb_writer):
     tb_writer.add_text("trainable_params", str(trainable_params), 0)
 
 
-def setup_logging(training_args):
+def setup_logging(training_args: TrainingArguments) -> None:
     # Setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",

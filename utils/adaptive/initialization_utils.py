@@ -1,11 +1,14 @@
 import logging
 import math
 import types
+from typing import Any, Dict, List, Optional, Tuple
 
 import matplotlib.pyplot as plt
+import numpy as np
 import peft
 import torch
 import wandb
+from peft import PeftConfig, PeftModel
 from peft.import_utils import is_bnb_available
 from peft.utils import _get_submodules
 from torch import Tensor
@@ -23,17 +26,19 @@ class WeightMaskingLinear(torch.nn.Linear):
     A Linear layer with dynamic masking applied to its weights.
     """
 
-    def __init__(self, in_features, out_features, rank_min, rank_max, tau=0, bias=True):
+    def __init__(
+        self, in_features: int, out_features: int, rank_min: int, rank_max: int, tau: int = 0, bias: bool = True
+    ) -> None:
         super().__init__(in_features, out_features, bias)
         self.register_buffer("ranks", torch.arange(rank_min, rank_max + 1))
-        self.rank_min = rank_min
-        self.rank_max = rank_max
-        self.tau = tau
-        self.s = None
-        self.alpha = None
-        self.index = None
+        self.rank_min: int = rank_min
+        self.rank_max: int = rank_max
+        self.tau: int = tau
+        self.s: Optional[torch.Tensor] = None
+        self.alpha: Optional[float] = None
+        self.index: Optional[int] = None
 
-    def log_matrix_to_wandb(self, matrix):
+    def log_matrix_to_wandb(self, matrix: np.ndarray) -> None:
         fig = plt.figure(figsize=(6, 6))
         plt.imshow(matrix, cmap="gray_r", interpolation="none", vmin=0, vmax=matrix.max())
         plt.colorbar(label="Value")
@@ -50,7 +55,7 @@ class WeightMaskingLinear(torch.nn.Linear):
             wandb.log({f"mask_{self.index}": wandb.Image(fig)})
         plt.close(fig)
 
-    def _create_mask(self, p):
+    def _create_mask(self, p: torch.Tensor) -> torch.Tensor:
         mask = torch.zeros_like(self.weight)
         for i in range(self.rank_min, self.rank_max + 1):
             tensor = torch.zeros_like(self.weight, device=self.weight.device, requires_grad=False)
@@ -58,24 +63,27 @@ class WeightMaskingLinear(torch.nn.Linear):
             mask += p[i - self.rank_min] * tensor
         return mask
 
-    def _create_discrete_mask(self):
+    def _create_discrete_mask(self) -> torch.Tensor:
         mask = torch.zeros_like(self.weight)
         discrete_rank = int(torch.round(self.s).item())
         mask[:discrete_rank, :discrete_rank] = 1
         return mask
 
-    def _prob_dist(self, s, alpha):
+    def _prob_dist(self, s: torch.Tensor, alpha: float) -> torch.Tensor:
         logits = -alpha * torch.log(1 + (s - self.ranks) ** 2)
         gumbel_dist = torch.distributions.Gumbel(0, 1)
         gumbel_vector = gumbel_dist.sample((self.rank_max + 1 - self.rank_min,)).to(self.weight.device)
         return torch.softmax(logits + self.tau * gumbel_vector, dim=0)
 
-    def set_mask(self, s, alpha, index: int = 0):
+    def set_mask(self, s: torch.Tensor, alpha: Optional[float] = None, index: int = 0) -> None:
         self.s = s
         self.alpha = alpha
         self.index = index
 
-    def forward(self, input_tensor):
+    def forward(
+        self,
+        input_tensor: torch.Tensor,
+    ) -> torch.Tensor:
         """
         Apply the mask and compute the forward pass.
         """
@@ -92,7 +100,9 @@ class WeightMaskingLinear(torch.nn.Linear):
         return torch.nn.functional.linear(input_tensor, masked_weight, self.bias)
 
 
-def get_replacement_module(weight, module_name, type_, writer, reconstruct_config):
+def get_replacement_module(
+    weight: torch.Tensor, module_name: str, type_: str, writer: Optional[Any], reconstruct_config: Dict[str, Any]
+) -> Tuple[torch.Tensor, torch.Tensor]:
     cfg = reconstruct_config[type_]
     if type_ == "svd":
         reconstructed_matrix, enc, dec = get_linear_rec_svd(
@@ -108,7 +118,7 @@ def get_replacement_module(weight, module_name, type_, writer, reconstruct_confi
     return final_enc, final_dec
 
 
-def init_module_weights(target_module: torch.nn.Linear, sigma: float):
+def init_module_weights(target_module: torch.nn.Linear, sigma: float) -> None:
     # Initialize weights with Gaussian distribution
     torch.nn.init.normal_(target_module.weight, mean=0, std=sigma)
     if hasattr(target_module, "bias") and target_module.bias is not None:
@@ -116,7 +126,7 @@ def init_module_weights(target_module: torch.nn.Linear, sigma: float):
         torch.nn.init.zeros_(target_module.bias)
 
 
-def replace_module_weights(target_module, new_weight):
+def replace_module_weights(target_module: torch.nn.Module, new_weight: torch.Tensor) -> None:
     device = target_module.weight.device
     target_module.weight = torch.nn.Parameter(new_weight)
 
@@ -126,7 +136,7 @@ def replace_module_weights(target_module, new_weight):
             module.to(device)
 
 
-def update_decoder_weights(target_module, new_weight):
+def update_decoder_weights(target_module: torch.nn.Module, new_weight: torch.Tensor) -> None:
     device = target_module.weight.device
     with torch.no_grad():
         target_module.weight.copy_(new_weight)
@@ -137,24 +147,26 @@ def update_decoder_weights(target_module, new_weight):
             module.to(device)
 
 
-def kaiming_uniform_init_lower_half(matrix: torch.tensor):
+def kaiming_uniform_init_lower_half(matrix: torch.Tensor) -> torch.Tensor:
     rows, _ = matrix.size()
     init.kaiming_uniform_(matrix[math.ceil(rows / 2) :, :], a=math.sqrt(5))
     return matrix
 
 
-def kaiming_uniform_init(matrix: torch.tensor):
+def kaiming_uniform_init(matrix: torch.Tensor) -> torch.Tensor:
     init.kaiming_uniform_(matrix, a=math.sqrt(5))
     return matrix
 
 
 def find_and_initialize(
-    model, peft_config, adapter_name, reconstr_type, reconstruct_config, writer, rank_allocation_args
-):
-    """
-    :param adapter_name: options: 'default'
-    :param reconstr_type: options: 'svd'
-    """
+    model: PeftModel,
+    peft_config: Dict[str, PeftConfig],
+    adapter_name: str,
+    reconstr_type: str,
+    reconstruct_config: Dict[str, Any],
+    writer: Optional[Any],
+    rank_allocation_args: Any,
+) -> None:
     (
         adaptive_rank_allocation,
         debug_mode,
@@ -216,16 +228,16 @@ def find_and_initialize(
 
 
 def initialize_lora_weights(
-    adaptive_rank_allocation,
-    half_init_dec,
-    lora_config,
-    r_squared,
-    rank_allocation_args,
+    adaptive_rank_allocation: bool,
+    half_init_dec: bool,
+    lora_config: PeftConfig,
+    r_squared: bool,
+    rank_allocation_args: Any,
     replacement_decoder_weight: Tensor,
     replacement_encoder_weight: Tensor,
-    replacement_module_random_init,
+    replacement_module_random_init: bool,
     target: Linear,
-):
+) -> None:
     if half_init_dec:
         kaiming_uniform_init_lower_half(replacement_decoder_weight)
     if replacement_module_random_init:
@@ -258,10 +270,12 @@ def initialize_lora_weights(
         init_module_weights(target.lora_A.default, sigma=0.00001)
 
 
-def extract_config(adapter_name, model, peft_config, reconstruct_config):
+def extract_config(
+    adapter_name: str, model: PeftModel, peft_config: Dict[str, PeftConfig], reconstruct_config: Dict[str, Any]
+) -> Tuple[bool, bool, bool, bool, List[str], PeftConfig, bool, Optional[str], str, bool, int]:
     debug_mode = reconstruct_config.get("debug_mode", False)
     adaptive_rank_allocation = reconstruct_config.get("adaptive_rank_allocation", True)
-    rank_allocation_weights_init = reconstruct_config.get("rank_allocation_weights_init", None)
+    rank_allocation_weights_init = reconstruct_config.get("rank_allocation_weights_init")
 
     half_init_dec = reconstruct_config["half_init_dec"]
     replacement_module_random_init = reconstruct_config["replacement_module_random_init"]
@@ -293,7 +307,9 @@ def extract_config(adapter_name, model, peft_config, reconstruct_config):
     )
 
 
-def initialize_adaptive(model, rank_allocation_weights_init, target_modules_count: int):
+def initialize_adaptive(
+    model: PeftModel, rank_allocation_weights_init: Optional[str], target_modules_count: int
+) -> None:
     if rank_allocation_weights_init == "uniform":
         param = torch.nn.Parameter(torch.zeros(target_modules_count))
     elif rank_allocation_weights_init == "quadratic":

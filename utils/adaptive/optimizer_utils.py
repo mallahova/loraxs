@@ -1,24 +1,26 @@
 import logging
 import math
-from typing import Any, Optional, Tuple, Union
+from typing import Tuple, Union
 
 import torch
 from datasets import Dataset
 from peft import PeftMixedModel, PeftModel
 from torch.optim import AdamW
-from torch.optim.lr_scheduler import LambdaLR
-from transformers import get_constant_schedule, get_linear_schedule_with_warmup
+from torch.optim.lr_scheduler import LRScheduler
+from transformers import TrainingArguments, get_constant_schedule, get_linear_schedule_with_warmup
+
+from utils.adaptive.args import ModelArguments, RankAllocaionArguments
 
 logger = logging.getLogger(__name__)
 
 
 def setup_optimizer_and_scheduler(
     model: Union[PeftModel, PeftMixedModel],
-    model_args,
-    rank_allocation_args,
-    train_dataset: Union[Dataset, Any],
-    training_args,
-) -> Tuple[Any, Any, AdamW, Optional[LambdaLR]]:
+    model_args: ModelArguments,
+    rank_allocation_args: RankAllocaionArguments,
+    train_dataset: Dataset,
+    training_args: TrainingArguments,
+) -> Tuple[int, int, AdamW, LRScheduler]:
     optimizer = torch.optim.AdamW(
         [
             {
