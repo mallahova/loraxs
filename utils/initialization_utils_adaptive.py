@@ -173,7 +173,7 @@ def find_and_initialize(
     :param adapter_name: options: 'default'
     :param reconstr_type: options: 'svd'
     """
-
+    debug_mode = reconstruct_config.get("debug_mode", False)
     adaptive_rank_allocation = reconstruct_config.get("adaptive_rank_allocation", True)
     rank_allocation_weights_init = reconstruct_config.get("rank_allocation_weights_init", None)
 
@@ -198,6 +198,7 @@ def find_and_initialize(
     assert not isinstance(lora_config.target_modules, str)
     print("Iterating through model's specified modules to initialize A/B matrices.")
     for key in tqdm(key_list):
+        if debug_mode and target_modules_count>2: break
         target_module_found = any(
             key.endswith(target_key) for target_key in lora_config.target_modules
         )
