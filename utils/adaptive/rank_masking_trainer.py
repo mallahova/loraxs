@@ -7,7 +7,7 @@ from transformers import (
     Trainer,
 )
 
-from utils.adaptive.initialization_utils import WeightMaskingLinear
+from utils.adaptive.mask import WeightMaskingLinear
 from utils.adaptive.schedulers import get_alpha_scheduler
 
 logger = logging.getLogger(__name__)
@@ -96,9 +96,8 @@ class RankMaskingTrainer(Trainer):
 
         # check if the memory should be updated
         if (
-            self.memory_update is not None
-            and current_epoch >= self.epochs_memory_start
-            and current_epoch < self.epochs_memory_start + self.epochs_memory_start_to_end
+                self.memory_update is not None
+                and self.epochs_memory_start <= current_epoch < self.epochs_memory_start + self.epochs_memory_start_to_end
         ):
             self.update_memory()
 
