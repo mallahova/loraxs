@@ -96,8 +96,8 @@ class RankMaskingTrainer(Trainer):
 
         # check if the memory should be updated
         if (
-                self.memory_update is not None
-                and self.epochs_memory_start <= current_epoch < self.epochs_memory_start + self.epochs_memory_start_to_end
+            self.memory_update is not None
+            and self.epochs_memory_start <= current_epoch < self.epochs_memory_start + self.epochs_memory_start_to_end
         ):
             self.update_memory()
 
